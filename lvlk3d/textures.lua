@@ -7,7 +7,7 @@ local canvasParams = {
     readable = true,
     msaa = 0,
     dpiscale = love.graphics.getDPIScale(),
-    mipmaps = "manual",
+    mipmaps = "none",
 }
 
 

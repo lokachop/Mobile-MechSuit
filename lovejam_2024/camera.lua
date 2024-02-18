@@ -8,6 +8,7 @@ function LoveJam.UpdateCameraTex(rt)
     LvLK3D.RenderTexture("camera_tex", function()
         local rtW, rtH = rt:getDimensions()
         local w, h = love.graphics.getCanvas():getDimensions()
+        love.graphics.clear(0, 0, 0, 1, true, true)
 
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.setBlendMode("alpha", "premultiplied")

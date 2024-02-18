@@ -1,8 +1,8 @@
 LoveJam = LoveJam or {}
 LvLK3D = LvLK3D or {}
 
-LoveJam.UniverseInterior = LvLK3D.NewUniverse("UniverseInterior")
-LvLK3D.PushUniverse(LoveJam.UniverseInterior)
+local UniverseInterior = LvLK3D.NewUniverse("UniverseInterior")
+LvLK3D.PushUniverse(UniverseInterior)
     LvLK3D.SetSunLighting(false) -- do sun lighting for testing meanwhile
     LvLK3D.SetSunDir(Vector(-0.61, -0.51, 0.59):GetNormalized())
     LvLK3D.SetAmbientCol({.25, .25, .25})
