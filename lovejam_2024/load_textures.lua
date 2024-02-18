@@ -25,3 +25,16 @@ LvLK3D.SetTextureFilter("metal4", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("monitor_sheet", "textures/monitor/monitor_sheet.png")
 LvLK3D.SetTextureFilter("monitor_sheet", "nearest", "nearest")
+
+
+LvLK3D.NewTexturePNG("flare1", "textures/light/flare1.png")
+LvLK3D.SetTextureFilter("flare1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("flare2", "textures/light/flare2.png")
+LvLK3D.SetTextureFilter("flare2", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("flare3", "textures/light/flare3.png")
+LvLK3D.SetTextureFilter("flare3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("flare4", "textures/light/flare4.png")
+LvLK3D.SetTextureFilter("flare4", "nearest", "nearest")

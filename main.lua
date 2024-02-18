@@ -15,6 +15,7 @@ LoveJam = LoveJam or {}
 function love.load()
 	local sw, sh = love.graphics.getDimensions()
 	love.mouse.setPosition(sw * .5, sh * .5)
+	love.mouse.setGrabbed(true)
 
 	require("lvlkui.lvlkui")
 	love.keyboard.setKeyRepeat(true)

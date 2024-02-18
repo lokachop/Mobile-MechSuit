@@ -66,6 +66,7 @@ function LoveJam.NewView(name)
         onExit = function() end,
         onThink = function(dt) end,
         onDraw = function() end,
+        onKeyPressed = function(key) end,
         name = name
     }
 
@@ -111,6 +112,9 @@ end
 
 local function applyNextSwitch()
     nextSwitch = CurTime + .75
+
+    local sw, sh = love.graphics.getDimensions()
+    love.mouse.setPosition(sw * .5, sh * .5)
 end
 
 
@@ -159,7 +163,10 @@ function LoveJam.ViewRender()
     view.onDraw()
 end
 
-
+function LoveJam.ViewKeyPressed(key)
+    local view = LoveJam.GetViewByName(currView)
+    view.onKeyPressed(key)
+end
 
 
 function LoveJam.RenderZones()

@@ -14,6 +14,7 @@ LoveJam.LoadFile("terminal")
 LoveJam.LoadFile("camera")
 LoveJam.LoadFile("interior")
 LoveJam.LoadFile("world")
+LoveJam.LoadFile("radio")
 
 LoveJam.LoadFile("view_manager")
 LoveJam.LoadFile("views.view_general")

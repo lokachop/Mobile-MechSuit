@@ -164,6 +164,28 @@ function LvLK3D.SetObjectMat(index, mat)
 	obj.mesh:setTexture(LvLK3D.Textures[obj.mat])
 end
 
+function LvLK3D.SetObjectShader(index, shader)
+	local obj = LvLK3D.CurrUniv["objects"][index]
+
+	if not shader then
+		obj.cShader = nil
+		return
+	end
+
+
+	local shObj = LvLK3D.GetShader(shader)
+	if not shObj then
+		return
+	end
+
+	obj.cShader = shader
+end
+
+function LvLK3D.SetObjectBlend(index, blendMode)
+	local obj = LvLK3D.CurrUniv["objects"][index]
+	obj.bMode = blendMode
+end
+
 function LvLK3D.SetObjectFlag(index, flag, value)
 	LvLK3D.CurrUniv["objects"][index][flag] = value
 end

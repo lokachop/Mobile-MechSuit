@@ -108,3 +108,19 @@ LvLK3D.NewShader("litsun", LvLK3D.RelaPath .. "/shader/mesh/litsun.frag", LvLK3D
     shader:send("lightDir", obj["LIT_LIGHT_POS"])
     shader:send("lightColour", obj["LIT_LIGHT_COL"])
 end)
+
+
+LvLK3D.NewShader("billboard", LvLK3D.RelaPath .. "/shader/mesh/generic.frag", LvLK3D.RelaPath .. "/shader/mesh/billboard.vert", function(obj, shader)
+    --shader:send("mdlRotationMatrix", obj.mat_rot)
+    shader:send("mdlTranslationMatrix", obj.mat_trs)
+    shader:send("mdlScaleMatrix", obj.mat_scl)
+
+    shader:send("viewMatrix", LvLK3D.CamMatrix_Rot * LvLK3D.CamMatrix_Trans)
+    shader:send("projectionMatrix", LvLK3D.CamMatrix_Proj)
+
+    shader:send("normInvert", (obj["NORM_INVERT"] == true) and true or false)
+
+    local crt = love.graphics.getCanvas()
+    local cw, ch = crt:getDimensions()
+    shader:send("aspect", cw / ch)
+end)

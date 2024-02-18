@@ -20,3 +20,7 @@ end
 
 function view.onExit()
 end
+
+function view.onKeyPressed(key)
+    LoveJam.TerminalOnKey(key)
+end

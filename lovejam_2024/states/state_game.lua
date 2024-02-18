@@ -9,16 +9,16 @@ local state = LoveJam.NewState(STATE_GAME)
 local sw, sh = love.graphics.getDimensions()
 local UniverseWorld = LvLK3D.GetUniverseByTag("UniverseWorld")
 local UniverseInterior = LvLK3D.GetUniverseByTag("UniverseInterior")
+local UniverseInteriorLights = LvLK3D.GetUniverseByTag("UniverseInteriorLights")
 
 
-local RTGame = LvLK3D.NewRenderTarget("RenderTargetGame", sw * .4, sh * .4)
+local RTGame = LvLK3D.NewRenderTarget("RenderTargetGame", sw * .75, sh * .75)
 LvLK3D.SetRenderTargetFilter(RTGame, "nearest", "nearest")
 
 
 local RTCamera = LvLK3D.NewRenderTarget("RenderTargetCamera", 512, 512)
 LvLK3D.SetRenderTargetFilter(RTCamera, "nearest", "nearest")
 LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
-
 
 function state.onThink(dt)
 	LvLK3D.MouseCamThink(dt)
@@ -31,19 +31,12 @@ function state.onThink(dt)
 
 	LoveJam.InternalViewThink(dt)
 	LoveJam.ViewThink(dt)
+	LoveJam.TerminalFlashThink()
 end
 
 
 function state.onRender()
 	love.graphics.clear(true, true, true)
-	LvLK3D.PushRenderTarget(RTGame)
-		LvLK3D.PushUniverse(UniverseWorld)
-		LvLK3D.Clear(0.1, 0.1, 0.2)
-			LvLK3D.RenderActiveUniverse()
-		LvLK3D.PopUniverse()
-	LvLK3D.PopRenderTarget()
-
-
 	LvLK3D.PushRenderTarget(RTCamera)
 		LvLK3D.PushUniverse(UniverseWorld)
 			LvLK3D.Clear(.1, .1, .2)
@@ -60,6 +53,10 @@ function state.onRender()
 			LvLK3D.ClearDepth()
 			LvLK3D.RenderActiveUniverse()
 		LvLK3D.PopUniverse()
+
+		LvLK3D.PushUniverse(UniverseInteriorLights)
+			LvLK3D.RenderActiveUniverse()
+		LvLK3D.PopUniverse()
 	LvLK3D.PopRenderTarget()
 
 	LvLK3D.RenderRTFullScreen(RTGame)
@@ -70,7 +67,8 @@ function state.onRender()
 end
 
 function state.onKeyPressed(key)
-	LvLK3D.ToggleMouseLock(key)
+	--LvLK3D.ToggleMouseLock(key)
+	LoveJam.ViewKeyPressed(key)
 end
 
 
@@ -81,9 +79,11 @@ end
 
 
 function state.onEnter()
+	LoveJam.StartRadio()
 	print("Init")
 end
 
 function state.onExit()
+	LoveJam.StopRadio()
 	print("Exit")
 end
