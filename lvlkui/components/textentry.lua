@@ -88,6 +88,11 @@ LvLKUI.DeclareComponent("textentry", {
 			return
 		end
 
+		local isCtrl = love.keyboard.isDown("lctrl")
+		if isCtrl and key == "v" then
+			elm.textBuffer = string.sub(elm.textBuffer .. love.system.getClipboardText(), 0, elm.maxLength == 0 and 12800 or elm.maxLength)
+		end
+
 		if key == "escape" then
 			elm:EscapeInput()
 			return

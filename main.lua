@@ -21,8 +21,9 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 
 	require("lovejam_2024.lovejam_main")
+	LvLK3D.SendModelsToC()
 
-	LoveJam.SetState(STATE_GAME)
+	LoveJam.SetState(STATE_LEVELEDIT)
 end
 
 function love.update(dt)

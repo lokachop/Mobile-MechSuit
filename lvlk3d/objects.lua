@@ -190,6 +190,13 @@ function LvLK3D.SetObjectFlag(index, flag, value)
 	LvLK3D.CurrUniv["objects"][index][flag] = value
 end
 
+function LvLK3D.SetObjectModel(index, mdl)
+	local obj = LvLK3D.CurrUniv["objects"][index]
+
+	obj.mdl = mdl or "cube"
+end
+
+
 function LvLK3D.UpdateObjectMesh(index)
 	initMesh(LvLK3D.CurrUniv["objects"][index])
 end

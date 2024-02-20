@@ -97,6 +97,10 @@ local function pushModelToC(name)
 		return
 	end
 
+	if nameToCIndex(name) then
+		return
+	end
+
 
 	print("Sending model \"" .. name .. "\" to C!")
 
@@ -186,10 +190,12 @@ local function pushModelToC(name)
 	lastID = lastID + 1
 end
 
-
-for k, v in pairs(LvLK3D.Models) do
-	pushModelToC(k)
+function LvLK3D.SendModelsToC()
+	for k, v in pairs(LvLK3D.Models) do
+		pushModelToC(k)
+	end
 end
+LvLK3D.SendModelsToC()
 
 local function lmat2c(matrix)
 	local matOut = ffi.new("Matrix4x4")
@@ -221,7 +227,10 @@ end
 local _trace_bf_cull = true
 local function traceObjC(obj, ro, rd, minDist)
 	local cIdx = nameToCIndex(obj.mdl)
-
+	if not cIdx then
+		pushModelToC(obj.mdl)
+		cIdx = nameToCIndex(obj.mdl)
+	end
 
 	local cMatrix = lmat2c(obj.mat_mdl)
 

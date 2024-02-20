@@ -6,9 +6,12 @@ function LoveJam.GetStateParameters(state)
     return LoveJam.States[state]
 end
 
-function LoveJam.NewState(id)
-    LoveJam.States[id] = {}
-    return LoveJam.States[id]
+local lastID = 0
+function LoveJam.NewState()
+    lastID = lastID + 1
+
+    LoveJam.States[lastID] = {}
+    return lastID, LoveJam.States[lastID]
 end
 
 function LoveJam.StateThink(dt)

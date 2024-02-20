@@ -2,14 +2,11 @@ LoveJam = LoveJam or {}
 LvLK3D = LvLK3D or {}
 
 LoveJam.LevelList = {}
-function LoveJam.NewLevel(name, data)
-    LoveJam.LevelList[name] = data
-end
-
-function LoveJam.LoadLevel(name)
-    local data = LoveJam.LevelList[name]
+function LoveJam.DeclareLevel(name, data)
     if not data then
-        print("Attempt to load non-existing level!")
+        print("Attempt to declare w/o data!")
         return
     end
+
+    LoveJam.LevelList[name] = data
 end

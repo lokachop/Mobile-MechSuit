@@ -21,5 +21,29 @@ LoveJam.LoadFile("views.view_general")
 LoveJam.LoadFile("views.view_terminal")
 LoveJam.LoadFile("views.view_camera")
 
+--[[
+    TODO
+    Comment out on release
+]]--
+
+
+LoveJam.LoadFile("leveleditor.new_level")
+LoveJam.LoadFile("leveleditor.save_level")
+LoveJam.LoadFile("leveleditor.load_level")
+
+LoveJam.LoadFile("leveleditor.init_vars")
+
+
+LoveJam.LoadFile("leveleditor.ui.levelprop_ui")
+LoveJam.LoadFile("leveleditor.ui.objectlist_ui")
+LoveJam.LoadFile("leveleditor.ui.objectprop_ui")
+LoveJam.LoadFile("leveleditor.ui.lightprop_ui")
+
+
+LoveJam.LoadFile("leveleditor.deco")
+LoveJam.LoadFile("leveleditor.light")
+LoveJam.LoadFile("leveleditor.modifyobject")
+
 LoveJam.LoadFile("state_handler")
 LoveJam.LoadFile("states.state_game")
+LoveJam.LoadFile("states.state_leveledit")

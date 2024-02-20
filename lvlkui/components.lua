@@ -36,6 +36,8 @@ local function copyTable(tbl)
 	for k, v in pairs(tbl) do
 		if type(v) == "table" then
 			new[k] = copyTable(v)
+		elseif type(v) == "vector" then
+			new[k] = v:Copy()
 		else
 			new[k] = v
 		end
@@ -46,7 +48,10 @@ end
 
 
 local function copy(obj)
-	if type(obj) == "table" then
+
+	if type(v) == "vector" then
+		new[k] = v:Copy()
+	elseif type(obj) == "table" then
 		return copyTable(obj)
 	else
 		return obj
@@ -97,3 +102,6 @@ LvLKUI.LoadFile("components.textentry")
 
 LvLKUI.LoadFile("components.testpanel")
 LvLKUI.LoadFile("components.mousetest")
+
+LvLKUI.LoadFile("components.checkbox")
+LvLKUI.LoadFile("components.vectorentry")

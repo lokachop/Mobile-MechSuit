@@ -2,9 +2,8 @@ LoveJam = LoveJam or {}
 LoveJam.States = LoveJam.States or {}
 LvLK3D = LvLK3D or {}
 
-STATE_GAME = 1
-local state = LoveJam.NewState(STATE_GAME)
-
+local id, state = LoveJam.NewState()
+STATE_GAME = id
 
 local sw, sh = love.graphics.getDimensions()
 local UniverseWorld = LvLK3D.GetUniverseByTag("UniverseWorld")
