@@ -28,7 +28,11 @@ local function initUI()
 end
 
 function state.onThink(dt)
-	LvLK3D.MouseCamThink(dt)
+	if LKEdit.GridEdit then
+		LKEdit.GECamThink(dt)
+	else
+		LvLK3D.MouseCamThink(dt)
+	end
 end
 
 
@@ -42,14 +46,16 @@ function state.onRender()
 		LvLK3D.PopUniverse()
 
 
-		LvLK3D.ClearDepth()
-		LvLK3D.PushUniverse(UniverseEdit)
-			LvLK3D.RenderActiveUniverse()
-		LvLK3D.PopUniverse()
+		if not LKEdit.GridEdit then
+			LvLK3D.ClearDepth()
+			LvLK3D.PushUniverse(UniverseEdit)
+				LvLK3D.RenderActiveUniverse()
+			LvLK3D.PopUniverse()
 
-		LvLK3D.PushUniverse(UniverseEditLights)
-			LvLK3D.RenderActiveUniverse()
-		LvLK3D.PopUniverse()
+			LvLK3D.PushUniverse(UniverseEditLights)
+				LvLK3D.RenderActiveUniverse()
+			LvLK3D.PopUniverse()
+		end
 	LvLK3D.PopRenderTarget()
 
 	love.graphics.setColor(1, 1, 1, 1)
@@ -66,16 +72,34 @@ function state.onRender()
 		love.graphics.setColor(1, 1, 1, 1)
 		love.graphics.print("F to select lookat..", sw * .5, sh * .5)
 	end
+
+
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.print("kp9 to enter gridEdit mode!", sw * .5, 24)
+	love.graphics.print("GridEdit; " .. tostring(LKEdit.GridEdit), sw * .5, 48)
+
+	if LKEdit.GridEdit then
+		LKEdit.GEPaint()
+	end
 end
 
 function state.onKeyPressed(key)
-	LvLK3D.ToggleMouseLock(key)
-	LKEdit.SelectLookAtHandle(key)
+	LKEdit.ToggleGridEdit(key)
+	if LKEdit.GridEdit then
+		LKEdit.GEKeys(key)
+	else
+		LvLK3D.ToggleMouseLock(key)
+		LKEdit.SelectLookAtHandle(key)
+	end
 end
 
 
 function state.onMouseMoved(mx, my, dx, dy)
-	LvLK3D.MouseCamUpdate(dx, dy)
+	if LKEdit.GridEdit then
+
+	else
+		LvLK3D.MouseCamUpdate(dx, dy)
+	end
 end
 
 

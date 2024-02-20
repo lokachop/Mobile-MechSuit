@@ -14,6 +14,8 @@ function LKEdit.SaveLevel(name)
     writeStr[#writeStr + 1] = "\tname = \"" .. cLevel.name .. "\","
     writeStr[#writeStr + 1] = "\tgW = " .. cLevel.gW .. ","
     writeStr[#writeStr + 1] = "\tgH = " .. cLevel.gH .. ","
+    writeStr[#writeStr + 1] = "\tgOX = " .. cLevel.gOX .. ","
+    writeStr[#writeStr + 1] = "\tgOY = " .. cLevel.gOY .. ","
     writeStr[#writeStr + 1] = "\tdeco = {"
     for k, v in pairs(cLevel.deco) do
         writeStr[#writeStr + 1] = "\t\t[" .. k .. "] = {"
@@ -38,7 +40,20 @@ function LKEdit.SaveLevel(name)
         writeStr[#writeStr + 1] = "\t\t},"
     end
     writeStr[#writeStr + 1] = "\t},"
+    writeStr[#writeStr + 1] = "\ttiles = {"
+    for k, v in pairs(cLevel.tiles) do
+        local miniconcat = {}
+        for k2, v2 in pairs(v) do
+            miniconcat[#miniconcat + 1] = "[" .. k2 .. "] = " .. v2 .. ", "
+        end
+        writeStr[#writeStr + 1] = "\t\t["  .. k .. "] = {" .. table.concat(miniconcat, "") .. "},"
+    end
+    writeStr[#writeStr + 1] = "\t},"
+
+
     writeStr[#writeStr + 1] = "}"
+    writeStr[#writeStr + 1] = ""
+    writeStr[#writeStr + 1] = "LoveJam.DeclareLevel(\"" .. cLevel.name .. "\", levelData)"
 
     local f_str = table.concat(writeStr, "\n")
     love.filesystem.write("lovejam_2024_map_" .. cLevel.name .. ".txt", f_str)

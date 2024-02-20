@@ -6,6 +6,8 @@ function LoveJam.LoadFile(path)
 end
 
 LoveJam.LoadFile("quat")
+LoveJam.LoadFile("consts")
+LoveJam.LoadFile("tiles")
 
 LoveJam.LoadFile("load_textures")
 LoveJam.LoadFile("load_models")
@@ -15,17 +17,22 @@ LoveJam.LoadFile("camera")
 LoveJam.LoadFile("interior")
 LoveJam.LoadFile("world")
 LoveJam.LoadFile("radio")
+LoveJam.LoadFile("movement")
 
 LoveJam.LoadFile("view_manager")
 LoveJam.LoadFile("views.view_general")
 LoveJam.LoadFile("views.view_terminal")
 LoveJam.LoadFile("views.view_camera")
 
+
+LoveJam.LoadFile("level_handler")
+LoveJam.LoadFile("levels.leveltest")
+LoveJam.LoadFile("levels.tiletest")
+
 --[[
     TODO
     Comment out on release
 ]]--
-
 
 LoveJam.LoadFile("leveleditor.new_level")
 LoveJam.LoadFile("leveleditor.save_level")
@@ -43,6 +50,7 @@ LoveJam.LoadFile("leveleditor.ui.lightprop_ui")
 LoveJam.LoadFile("leveleditor.deco")
 LoveJam.LoadFile("leveleditor.light")
 LoveJam.LoadFile("leveleditor.modifyobject")
+LoveJam.LoadFile("leveleditor.gridedit")
 
 LoveJam.LoadFile("state_handler")
 LoveJam.LoadFile("states.state_game")

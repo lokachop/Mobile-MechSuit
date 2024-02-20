@@ -38,3 +38,20 @@ LvLK3D.SetTextureFilter("flare3", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("flare4", "textures/light/flare4.png")
 LvLK3D.SetTextureFilter("flare4", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("flare5", "textures/light/flare5.png")
+LvLK3D.SetTextureFilter("flare5", "nearest", "nearest")
+
+
+--DEv
+LvLK3D.NewTexturePNG("dev_floor", "textures/dev/dev_tile.png")
+LvLK3D.SetTextureFilter("dev_floor", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("dev_block", "textures/dev/block.png")
+LvLK3D.SetTextureFilter("dev_block", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("dev_kill", "textures/dev/kill.png")
+LvLK3D.SetTextureFilter("dev_kill", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png")
+LvLK3D.SetTextureFilter("dev_spawn", "nearest", "nearest")

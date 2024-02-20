@@ -23,7 +23,7 @@ function love.load()
 	require("lovejam_2024.lovejam_main")
 	LvLK3D.SendModelsToC()
 
-	LoveJam.SetState(STATE_LEVELEDIT)
+	LoveJam.SetState(STATE_GAME)
 end
 
 function love.update(dt)

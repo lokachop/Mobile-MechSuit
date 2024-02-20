@@ -8,10 +8,12 @@ function LKEdit.NewLevel(name)
         name = name,
         gW = 0,
         gH = 0,
+        gOX = 0,
+        gOY = 0,
 
         deco = {},
         lights = {},
-        gridData = {},
+        tiles = {},
         dark = false,
     }
 
