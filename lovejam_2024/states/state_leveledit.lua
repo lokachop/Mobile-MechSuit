@@ -110,6 +110,8 @@ function state.onEnter()
 	--	fullscreen = false,
 	--})
 	love.mouse.setGrabbed(false)
+	LvLK3D.FOV = 90
+	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
 	initUI()
 end
 

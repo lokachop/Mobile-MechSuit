@@ -23,7 +23,8 @@ function love.load()
 	require("lovejam_2024.lovejam_main")
 	LvLK3D.SendModelsToC()
 
-	LoveJam.SetState(STATE_GAME)
+	LoveJam.SetState(STATE_MAINMENU)
+	love.audio.setVolume(0.2)
 end
 
 function love.update(dt)

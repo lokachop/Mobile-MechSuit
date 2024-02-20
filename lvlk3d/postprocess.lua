@@ -143,3 +143,58 @@ LvLK3D.DeclareNewPPEffect("frameAccum", {
 
     end
 })
+
+
+local shaderBlur = love.graphics.newShader(LvLK3D.RelaPath .. "/shader/screen/blur.frag")
+LvLK3D.DeclareNewPPEffect("blur", {
+    ["parameteri"] = {
+        ["passes"] = 4,
+        ["amount"] = 2,
+    },
+    ["buffers"] = {
+        ["bufferBlurA"] = {-1, -1},
+        ["bufferBlurB"] = {-1, -1}
+    },
+    ["onRender"] = function(buffers, parameteri)
+        local w, h = love.graphics.getDimensions()
+
+        local curr = love.graphics.getCanvas()
+        local cw, ch = curr:getDimensions()
+
+
+        local passes = parameteri["passes"]
+        local amount = parameteri["amount"]
+        local buffA = buffers["bufferBlurA"]
+        local buffB = buffers["bufferBlurB"]
+
+
+        local bw, bh = buffA:getDimensions()
+
+
+        love.graphics.setCanvas(buffA)
+            love.graphics.setBlendMode("alpha", "premultiplied")
+            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.draw(curr, 0, 0, 0, w / cw, h / ch)
+        love.graphics.setCanvas(curr)
+
+
+        love.graphics.setBlendMode("alpha")
+        local rot = false
+        love.graphics.setShader(shaderBlur)
+        for i = 1, passes do
+            shaderBlur:send("add", (i / passes) * amount)
+            rot = (i % 2) == 0
+            love.graphics.setCanvas(rot and buffA or buffB)
+                love.graphics.draw(rot and buffB or buffA, 0, 0)
+            love.graphics.setCanvas()
+        end
+        love.graphics.setShader()
+
+        love.graphics.setCanvas(curr)
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.setBlendMode("alpha", "premultiplied")
+            love.graphics.draw(rot and buffB or buffA, 0, 0, 0, w / bw, h / bh)
+        love.graphics.setBlendMode("alpha")
+
+    end
+})

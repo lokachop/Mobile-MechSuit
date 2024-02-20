@@ -79,6 +79,8 @@ end
 
 function state.onEnter()
 	LoveJam.StartRadio()
+	LvLK3D.FOV = 90
+	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
 	print("Init")
 end
 

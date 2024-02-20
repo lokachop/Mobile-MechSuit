@@ -53,5 +53,6 @@ LoveJam.LoadFile("leveleditor.modifyobject")
 LoveJam.LoadFile("leveleditor.gridedit")
 
 LoveJam.LoadFile("state_handler")
+LoveJam.LoadFile("states.state_mainmenu")
 LoveJam.LoadFile("states.state_game")
 LoveJam.LoadFile("states.state_leveledit")
