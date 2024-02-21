@@ -27,7 +27,8 @@ function LKEdit.SaveLevel(name)
         writeStr[#writeStr + 1] = "\t\t\tfullbright = " .. tostring(v.fullbright) .. ","
         writeStr[#writeStr + 1] = "\t\t\tshadow = " .. tostring(v.shadow) .. ","
         writeStr[#writeStr + 1] = "\t\t\tshaded = " .. tostring(v.shaded) .. ","
-
+        writeStr[#writeStr + 1] = "\t\t\tuvScaleX = " .. v.uvScaleX .. ","
+        writeStr[#writeStr + 1] = "\t\t\tuvScaleY = " .. v.uvScaleY .. ","
         writeStr[#writeStr + 1] = "\t\t},"
     end
     writeStr[#writeStr + 1] = "\t},"

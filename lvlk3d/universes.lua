@@ -49,11 +49,11 @@ function LvLK3D.ClearUniverse(univ)
 	univ = univ or LvLK3D.CurrUniv
 
 	for k, v in pairs(univ["objects"]) do
-		univ[k] = nil
+		univ["objects"][k] = nil
 	end
 
 	for k, v in pairs(univ["lights"]) do
-		univ[k] = nil
+		univ["lights"][k] = nil
 	end
 end
 

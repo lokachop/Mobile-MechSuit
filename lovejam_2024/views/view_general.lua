@@ -18,6 +18,14 @@ LoveJam.NewZone(view, {
     target = "view_camera"
 })
 
+LoveJam.NewZone(view, {
+    x = .1,
+    y = 0,
+    w = .8,
+    h = .1,
+    target = "view_glass"
+})
+
 
 function view.onEnter()
     LoveJam.ViewTarget = Vector(0, -.725, 1.1)

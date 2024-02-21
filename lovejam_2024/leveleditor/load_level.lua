@@ -30,9 +30,11 @@ function LKEdit.LoadLevel(name)
         decoPtr.mat = v.mat or "none"
         decoPtr.mdl = v.mdl or "cube"
 
-        decoPtr.fullbright = v.fullbright ~= nil and v.fullbright or false
-        decoPtr.shadow = v.shadow ~= nil and v.shadow or true
-        decoPtr.shaded = v.shaded ~= nil and v.shaded or true
+        decoPtr.fullbright = v.fullbright
+        decoPtr.shadow = v.shadow
+        decoPtr.shaded = v.shaded
+        decoPtr.uvScaleX = v.uvScaleX ~= nil and v.uvScaleX or 1
+        decoPtr.uvScaleY = v.uvScaleY ~= nil and v.uvScaleY or 1
 
         LKEdit.UpdateDeco(dID)
     end

@@ -25,6 +25,7 @@ function LKEdit.UpdateDeco(id)
 
         LvLK3D.SetObjectFlag(oDeco, "SHADING", decoParams.shaded)
         LvLK3D.SetObjectFlag(oDeco, "FULLBRIGHT", decoParams.fullbright)
+        LvLK3D.SetObjectFlag(oDeco, "UV_SCALE", {decoParams.uvScaleX, decoParams.uvScaleY})
         LvLK3D.SetObjectShadow(oDeco, decoParams.shadow)
 
         LvLK3D.UpdateObjectMesh(oDeco)
@@ -45,6 +46,8 @@ function LKEdit.NewDeco()
         fullbright = false,
         shadow = true,
         shaded = true,
+        uvScaleX = 1,
+        uvScaleY = 1,
         lvlk3d_id = 0,
         id = id,
     }

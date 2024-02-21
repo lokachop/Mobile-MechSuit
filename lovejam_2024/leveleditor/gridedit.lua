@@ -125,6 +125,10 @@ function LKEdit.GEKeys(key)
 	if key == "4" then
 		addTileToLevel(GridEditTarget[1], GridEditTarget[2], TILE_SPAWN)
 	end
+
+	if key == "5" then
+		addTileToLevel(GridEditTarget[1], GridEditTarget[2], TILE_END)
+	end
 end
 
 

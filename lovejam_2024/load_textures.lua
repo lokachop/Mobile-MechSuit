@@ -55,3 +55,6 @@ LvLK3D.SetTextureFilter("dev_kill", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png")
 LvLK3D.SetTextureFilter("dev_spawn", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("dev_end", "textures/dev/end.png")
+LvLK3D.SetTextureFilter("dev_end", "nearest", "nearest")

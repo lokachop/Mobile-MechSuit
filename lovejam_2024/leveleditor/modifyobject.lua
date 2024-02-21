@@ -106,21 +106,14 @@ local function selectInView()
 
     local hit, pos, norm, dist, obj = LvLK3D.TraceRay(camPos, dir, 512)
     if not hit then
-        return false
+        return false, math.huge
     end
 
     if not obj then
-        return false
+        return false, math.huge
     end
 
-    local oID = obj.LKEDIT_ID
-    if not oID then
-        return false
-    end
-
-    local oType = obj.LKEDIT_TYPE
-    LKEdit.SelectEntity(oID, oType)
-    return true
+    return obj, dist
 end
 
 
@@ -130,18 +123,21 @@ function LKEdit.SelectLookAtHandle(key)
         return
     end
 
-    local camPos = LvLK3D.CamPos
-    local dir = LvLK3D.CamMatrix_Rot:Forward()
     LvLK3D.PushUniverse(UniverseEdit)
-        if selectInView() then
-            return
-        end
+        local objE, distE = selectInView()
     LvLK3D.PopUniverse()
 
-    ::testlight::
     LvLK3D.PushUniverse(UniverseEditLights)
-        if selectInView() then
-            return
-        end
+        local objL, distL = selectInView()
     LvLK3D.PopUniverse()
+
+    local obj = distE < distL and objE or objL
+
+    local oID = obj.LKEDIT_ID
+    if not oID then
+        return
+    end
+
+    local oType = obj.LKEDIT_TYPE
+    LKEdit.SelectEntity(oID, oType)
 end

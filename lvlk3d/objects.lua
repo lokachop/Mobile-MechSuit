@@ -20,6 +20,8 @@ local function initMesh(obj)
 	local mdlSmoothNormals = mdl.s_normals
 
 
+	local uvScale = obj["UV_SCALE"] or {1, 1}
+
 	local isSmooth = obj["SHADING_SMOOTH"] == true
 	for i = 1, #mdlIndices do
 		local indCont = mdlIndices[i]
@@ -31,14 +33,17 @@ local function initMesh(obj)
 		local v1 = mdlVerts[indCont[1][1]]
 		local uv1 = mdlUVs[indCont[1][2]]
 		local norm1 = isSmooth and mdlSmoothNormals[indCont[1][1]] or normFlat
+		local ruv1 = {uv1[1] * uvScale[1], uv1[2] * uvScale[2]}
 
 		local v2 = mdlVerts[indCont[2][1]]
 		local uv2 = mdlUVs[indCont[2][2]]
 		local norm2 = isSmooth and mdlSmoothNormals[indCont[2][1]] or normFlat
+		local ruv2 = {uv2[1] * uvScale[1], uv2[2] * uvScale[2]}
 
 		local v3 = mdlVerts[indCont[3][1]]
 		local uv3 = mdlUVs[indCont[3][2]]
 		local norm3 = isSmooth and mdlSmoothNormals[indCont[3][1]] or normFlat
+		local ruv3 = {uv3[1] * uvScale[1], uv3[2] * uvScale[2]}
 
 		if (obj["NORM_INVERT"] == true) then
 			norm1 = -norm1
@@ -47,9 +52,9 @@ local function initMesh(obj)
 		end
 
 
-		finalMesh[#finalMesh + 1] = {v1[1], v1[2], v1[3], uv1[1], uv1[2], norm1[1], norm1[2], norm1[3]}
-		finalMesh[#finalMesh + 1] = {v2[1], v2[2], v2[3], uv2[1], uv2[2], norm2[1], norm2[2], norm2[3]}
-		finalMesh[#finalMesh + 1] = {v3[1], v3[2], v3[3], uv3[1], uv3[2], norm3[1], norm3[2], norm3[3]}
+		finalMesh[#finalMesh + 1] = {v1[1], v1[2], v1[3], ruv1[1], ruv1[2], norm1[1], norm1[2], norm1[3]}
+		finalMesh[#finalMesh + 1] = {v2[1], v2[2], v2[3], ruv2[1], ruv2[2], norm2[1], norm2[2], norm2[3]}
+		finalMesh[#finalMesh + 1] = {v3[1], v3[2], v3[3], ruv3[1], ruv3[2], norm3[1], norm3[2], norm3[3]}
 	end
 
 

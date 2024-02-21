@@ -51,15 +51,15 @@ LvLK3D.PushUniverse(UniverseInterior)
 	--LvLK3D.AddLightToUniv("CompLight1", Vector(-0.3, -1.175, -0.1), 0.05, {0.2, 0.8, 0.1})
 	--LvLK3D.AddLightToUniv("CompLight2", Vector(0.3, -1.175, -0.1), 0.05, {0.2, 0.8, 0.1})
 
-
-	local interiorHull = LvLK3D.AddObjectToUniv("interiorHull", "interior_hull")
-	LvLK3D.SetObjectPos(interiorHull, Vector(0, 0, 0))
+	local interiorHull = LvLK3D.AddObjectToUniv("interiorHullExposed", "interior_hull_exposed")
+	LvLK3D.SetObjectPos(interiorHull, Vector(0, 0, .2))
 	LvLK3D.SetObjectScl(interiorHull, Vector(2, 2, 2))
 	LvLK3D.SetObjectMat(interiorHull, "metal4")
 	LvLK3D.SetObjectFlag(interiorHull, "SHADING", true)
 	LvLK3D.SetObjectFlag(interiorHull, "SHADING_SMOOTH", false)
 	LvLK3D.SetObjectFlag(interiorHull, "NORM_INVERT", false)
 	LvLK3D.SetObjectFlag(interiorHull, "FULLBRIGHT", false)
+	LvLK3D.SetObjectFlag(interiorHull, "UV_SCALE", {48, 48})
 	LvLK3D.UpdateObjectMesh(interiorHull)
 
 

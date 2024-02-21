@@ -7,6 +7,7 @@ LvLK3D.LoadModelFromOBJ("robot_legr", "models/robot/robot_legr.obj")
 
 
 LvLK3D.LoadModelFromOBJ("interior_hull", "models/interior/interior_hull.obj")
+LvLK3D.LoadModelFromOBJ("interior_hull_exposed", "models/interior/interior_hull_exposed.obj")
 
 LvLK3D.LoadModelFromOBJ("monitor", "models/interior/monitor/monitor.obj")
 LvLK3D.LoadModelFromOBJ("monitor_screen", "models/interior/monitor/monitorScreen.obj")

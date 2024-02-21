@@ -93,6 +93,7 @@ local commandTable = {}
 local commandState = "username"
 local function newCommand(name, params)
 	commandTable[name] = {
+		desc = params.desc or "No description",
 		onFirst = params.onFirst or function() end,
 		onEnter = params.onEnter or function(msg, realMsg) end,
 		name = name
@@ -128,6 +129,7 @@ end
 
 
 newCommand("username", {
+	desc = "Changes your username",
 	onFirst = function()
 		LoveJam.PushMessageToTerminal("Please enter your username.")
 	end,
@@ -143,8 +145,13 @@ newCommand("username", {
 })
 
 newCommand("help", {
+	desc = "Displays list of commands",
 	onFirst = function()
 		LoveJam.PushMessageToTerminal("--==Commands==--")
+		for k, v in pairs(commandTable) do
+			LoveJam.PushMessageToTerminal("[" .. k .. "]")
+			LoveJam.PushMessageToTerminal("    " .. v.desc)
+		end
 		setCommandState("none")
 	end,
 	onEnter = function(msg)
@@ -152,6 +159,7 @@ newCommand("help", {
 })
 
 newCommand("clear", {
+	desc = "Clears the terminal",
 	onFirst = function()
 		LoveJam.ClearTerminalBuffer()
 		setCommandState("none")
@@ -160,6 +168,39 @@ newCommand("clear", {
 	end,
 })
 
+
+newCommand("forward", {
+	desc = "Moves the mech forward",
+	onFirst = function()
+		LoveJam.PushMessageToTerminal("Moving forward!")
+		LoveJam.MoveMechForward()
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
+
+newCommand("left", {
+	desc = "Rotates the mech left",
+	onFirst = function()
+		LoveJam.PushMessageToTerminal("Rotating left!")
+		LoveJam.RotateMechLeft()
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
+
+newCommand("right", {
+	desc = "Rotates the mech right",
+	onFirst = function()
+		LoveJam.PushMessageToTerminal("Rotating righ!")
+		LoveJam.RotateMechRight()
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
 
 
 local function playKB(sample)

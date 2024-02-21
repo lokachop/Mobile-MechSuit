@@ -10,6 +10,7 @@ local canvasParams = {
     mipmaps = "none",
 }
 
+local wrap = "repeat"
 
 function LvLK3D.NewTextureFunc(name, w, h, func)
     local canvasData = love.graphics.newCanvas(w, h, canvasParams)
@@ -26,6 +27,7 @@ function LvLK3D.NewTextureFunc(name, w, h, func)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[name] = canvasData
 end
@@ -45,6 +47,8 @@ function LvLK3D.RenderTexture(name, func)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
+
 end
 
 function LvLK3D.CopyTexture(name, to)
@@ -68,6 +72,7 @@ function LvLK3D.CopyTexture(name, to)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[to] = canvasData
 end
@@ -183,6 +188,7 @@ function LvLK3D.NewTexturePPM(name, path)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[name] = canvasData
 end
@@ -211,6 +217,7 @@ function LvLK3D.NewTexturePNG(name, path)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[name] = canvasData
 end
@@ -241,6 +248,7 @@ function LvLK3D.NewTextureEmpty(name, w, h, col)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[name] = canvasData
 end
@@ -270,6 +278,7 @@ function LvLK3D.NewTexturePixel(name, w, h, func)
     if canvasParams.mipmaps and canvasParams.mipmaps == "manual" then
         canvasData:generateMipmaps()
     end
+    canvasData:setWrap(wrap, wrap)
 
     LvLK3D.Textures[name] = canvasData
 end

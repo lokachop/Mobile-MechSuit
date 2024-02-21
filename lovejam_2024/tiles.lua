@@ -63,4 +63,14 @@ TILE_SPAWN = LoveJam.DeclareTile({
     solid = false,
     harmful = true,
     editorTex = "dev_spawn",
+    onInit = function(x, y)
+        LoveJam.SetMechPos(x, y)
+    end
+})
+
+TILE_END = LoveJam.DeclareTile({
+    name = "end",
+    solid = false,
+    harmful = true,
+    editorTex = "dev_end",
 })

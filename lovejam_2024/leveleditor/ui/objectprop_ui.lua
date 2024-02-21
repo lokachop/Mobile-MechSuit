@@ -131,6 +131,39 @@ function LKEdit.InitFrameEntProp()
 	LvLKUI.PushElement(e_entMat, LKEdit.FEntProp)
 	yAccum = yAccum + 32
 
+	local e_uvScaleX = LvLKUI.NewElement("e_uvScaleX", "textentry")
+	e_uvScaleX:SetPos({32, yAccum})
+	e_uvScaleX:SetSize({256 * .5, 16})
+	e_uvScaleX:SetLabel("uvScaleX")
+	e_uvScaleX:SetText(1)
+	e_uvScaleX:SetNumericalOnly(true)
+	e_uvScaleX:SetOnTextChange(function(elm, new)
+		new = tonumber(new)
+		if not new then
+			return
+		end
+
+		LKEdit.SetSelectedEntityParameter("uvScaleX", new, "deco")
+	end)
+	LvLKUI.PushElement(e_uvScaleX, LKEdit.FEntProp)
+
+	local e_uvScaleY = LvLKUI.NewElement("e_uvScaleY", "textentry")
+	e_uvScaleY:SetPos({32 + 128, yAccum})
+	e_uvScaleY:SetSize({256 * .5, 16})
+	e_uvScaleY:SetLabel("uvScaleY")
+	e_uvScaleY:SetText(1)
+	e_uvScaleY:SetNumericalOnly(true)
+	e_uvScaleY:SetOnTextChange(function(elm, new)
+		new = tonumber(new)
+		if not new then
+			return
+		end
+
+		LKEdit.SetSelectedEntityParameter("uvScaleY", new, "deco")
+	end)
+	LvLKUI.PushElement(e_uvScaleY, LKEdit.FEntProp)
+	yAccum = yAccum + 32
+
 	checkAndLabel(LKEdit.FEntProp, "fullbright", function(elm, new)
 		LKEdit.SetSelectedEntityParameter("fullbright", new, "deco")
 	end, yAccum)
@@ -178,4 +211,10 @@ function LKEdit.PushFrameEntProps(ent, eType, id)
 
 	local childShadow = LKEdit.FEntProp:GetChild("c_prop" .. "shadow")
 	childShadow:SetValue(ent.shadow)
+
+	local childUVScaleX = LKEdit.FEntProp:GetChild("e_uvScaleX")
+	childUVScaleX:SetText(ent.uvScaleX)
+
+	local childUVScaleY = LKEdit.FEntProp:GetChild("e_uvScaleY")
+	childUVScaleY:SetText(ent.uvScaleY)
 end

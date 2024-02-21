@@ -18,16 +18,18 @@ LoveJam.LoadFile("interior")
 LoveJam.LoadFile("world")
 LoveJam.LoadFile("radio")
 LoveJam.LoadFile("movement")
+LoveJam.LoadFile("gameplay")
 
 LoveJam.LoadFile("view_manager")
 LoveJam.LoadFile("views.view_general")
 LoveJam.LoadFile("views.view_terminal")
 LoveJam.LoadFile("views.view_camera")
-
+LoveJam.LoadFile("views.view_glass")
 
 LoveJam.LoadFile("level_handler")
 LoveJam.LoadFile("levels.leveltest")
 LoveJam.LoadFile("levels.tiletest")
+LoveJam.LoadFile("levels.level1test")
 
 --[[
     TODO
