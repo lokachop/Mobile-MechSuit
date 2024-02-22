@@ -62,6 +62,7 @@ end
 LvLK3D.DeclareNewPPEffect("cbBlur", {
     ["parameteri"] = {
         ["blendFactor"] = 0.95,
+        ["offset"] = 1,
     },
     ["buffers"] = {
         ["temp"] = {-1, -1},
@@ -78,7 +79,7 @@ LvLK3D.DeclareNewPPEffect("cbBlur", {
         local curr = love.graphics.getCanvas()
         local cw, ch = curr:getDimensions()
 
-        local _off = 1
+        local _off = parameteri["offset"]
         local blendfactor = parameteri["blendFactor"]
         local _blendinverse = 1 - blendfactor
 
@@ -87,17 +88,17 @@ LvLK3D.DeclareNewPPEffect("cbBlur", {
             love.graphics.clear(0, 0, 0, 1, true, true)
             love.graphics.setBlendMode("alpha", "premultiplied")
             love.graphics.setColor(1, 1, 1, blendfactor)
-            love.graphics.draw(buff1, _off, _off, 0, w / cw, h / ch)
+            love.graphics.draw(buff1, _off, _off, 0, 1, 1)
 
         love.graphics.setCanvas(buff1)
             love.graphics.clear(0, 0, 0, 1, true, true)
             love.graphics.setBlendMode("alpha", "premultiplied")
             love.graphics.setColor(blendfactor, blendfactor, blendfactor, 1)
-            love.graphics.draw(buff2, 0, 0, 0, w / cw, h / ch)
+            love.graphics.draw(buff2, 0, 0, 0, 1, 1)
 
             love.graphics.setBlendMode("alpha", "premultiplied")
             love.graphics.setColor(_blendinverse, _blendinverse, _blendinverse, _blendinverse)
-            love.graphics.draw(curr, _off, _off, 0, w / cw, h / ch)
+            love.graphics.draw(curr, _off, _off, 0, 1, 1)
 
         love.graphics.setCanvas(curr)
 
@@ -132,7 +133,7 @@ LvLK3D.DeclareNewPPEffect("frameAccum", {
         love.graphics.setCanvas(buff1)
             love.graphics.setBlendMode("alpha")
             love.graphics.setColor(1, 1, 1, _blendinverse)
-            love.graphics.draw(curr, 0, 0, 0, w / cw, h / ch)
+            love.graphics.draw(curr, 0, 0, 0, 1, 1)
         love.graphics.setCanvas(curr)
 
 
@@ -174,7 +175,7 @@ LvLK3D.DeclareNewPPEffect("blur", {
         love.graphics.setCanvas(buffA)
             love.graphics.setBlendMode("alpha", "premultiplied")
             love.graphics.setColor(1, 1, 1, 1)
-            love.graphics.draw(curr, 0, 0, 0, w / cw, h / ch)
+            love.graphics.draw(curr, 0, 0, 0, 1, 1)
         love.graphics.setCanvas(curr)
 
 

@@ -77,6 +77,10 @@ function state.onRender()
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print("kp9 to enter gridEdit mode!", sw * .5, 24)
 	love.graphics.print("GridEdit; " .. tostring(LKEdit.GridEdit), sw * .5, 48)
+	love.graphics.print("MoveFast; " .. tostring(LKEdit.NormalKeyMode), sw * .5, 48 + 24)
+
+
+
 
 	if LKEdit.GridEdit then
 		LKEdit.GEPaint()
@@ -88,6 +92,7 @@ function state.onKeyPressed(key)
 	if LKEdit.GridEdit then
 		LKEdit.GEKeys(key)
 	else
+		LKEdit.LEKeys(key)
 		LvLK3D.ToggleMouseLock(key)
 		LKEdit.SelectLookAtHandle(key)
 	end

@@ -83,6 +83,12 @@ local pushEntityTypeCallbacks = {
 
 
 
+function LKEdit.PushParamsForSelected()
+    if pushEntityTypeCallbacks[LKEdit.SelectedType] then
+        pushEntityTypeCallbacks[LKEdit.SelectedType](LKEdit.SelectedEntity, LKEdit.SelectedType, LKEdit.SelectedID)
+    end
+end
+
 function LKEdit.SelectEntity(id, eType)
     local ent = nil
     if eType == "deco" then
@@ -131,7 +137,10 @@ function LKEdit.SelectLookAtHandle(key)
         local objL, distL = selectInView()
     LvLK3D.PopUniverse()
 
-    local obj = distE < distL and objE or objL
+    local obj = (distE < distL) and objE or objL
+    if not obj then
+        return
+    end
 
     local oID = obj.LKEDIT_ID
     if not oID then

@@ -115,6 +115,10 @@ function state.onKeyPressed(key)
 	else
 		LoveJam.ViewKeyPressed(key)
 	end
+
+	if key == "kp8" then
+		LoveJam.SetState(STATE_NEXTLEVEL)
+	end
 end
 
 
@@ -137,7 +141,7 @@ function state.onEnter()
 	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
 	print("Init")
 
-	LoveJam.LoadLevel("level1test")
+	LoveJam.LoadLevel("level1")
 end
 
 function state.onExit()

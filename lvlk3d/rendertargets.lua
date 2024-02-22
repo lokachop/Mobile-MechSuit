@@ -23,6 +23,10 @@ end
 
 LvLK3D.BaseRT = LvLK3D.NewRenderTarget("LvLK3D_base_rt", 512, 512)
 
+function LvLK3D.GetRenderTargetByName(name)
+    return LvLK3D.RTRegistry[name]
+end
+
 LvLK3D.CurrRT = LvLK3D.BaseRT
 LvLK3D.RTStack = LvLK3D.RTStack or {}
 

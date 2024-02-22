@@ -12,4 +12,8 @@ LvLK3D.LoadModelFromOBJ("interior_hull_exposed", "models/interior/interior_hull_
 LvLK3D.LoadModelFromOBJ("monitor", "models/interior/monitor/monitor.obj")
 LvLK3D.LoadModelFromOBJ("monitor_screen", "models/interior/monitor/monitorScreen.obj")
 
-LvLK3D.LoadModelFromOBJ("push_box", "models/push_box.obj")
+
+
+LvLK3D.LoadModelFromOBJ("push_box", "models/world/push_box.obj")
+LvLK3D.LoadModelFromOBJ("barrel", "models/world/barrel.obj")
+LvLK3D.LoadModelFromOBJ("silo", "models/world/silo.obj")

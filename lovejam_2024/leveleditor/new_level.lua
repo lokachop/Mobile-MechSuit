@@ -6,6 +6,8 @@ LKEdit = LKEdit or {}
 function LKEdit.NewLevel(name)
     local levelData = {
         name = name,
+        nextLevel = "none",
+        isNoVis = false,
         gW = 0,
         gH = 0,
         gOX = 0,

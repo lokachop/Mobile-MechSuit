@@ -12,6 +12,8 @@ function LKEdit.SaveLevel(name)
 
     writeStr[#writeStr + 1] = "local levelData = {"
     writeStr[#writeStr + 1] = "\tname = \"" .. cLevel.name .. "\","
+    writeStr[#writeStr + 1] = "\tnextLevel = \"" .. cLevel.nextLevel .. "\","
+    writeStr[#writeStr + 1] = "\tisNoVis = " .. tostring(cLevel.isNoVis) .. ","
     writeStr[#writeStr + 1] = "\tgW = " .. cLevel.gW .. ","
     writeStr[#writeStr + 1] = "\tgH = " .. cLevel.gH .. ","
     writeStr[#writeStr + 1] = "\tgOX = " .. cLevel.gOX .. ","

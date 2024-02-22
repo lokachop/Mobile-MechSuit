@@ -31,6 +31,8 @@ LoveJam.LoadFile("level_handler")
 LoveJam.LoadFile("levels.leveltest")
 LoveJam.LoadFile("levels.tiletest")
 LoveJam.LoadFile("levels.level1test")
+LoveJam.LoadFile("levels.level1")
+
 
 --[[
     TODO
@@ -54,8 +56,11 @@ LoveJam.LoadFile("leveleditor.deco")
 LoveJam.LoadFile("leveleditor.light")
 LoveJam.LoadFile("leveleditor.modifyobject")
 LoveJam.LoadFile("leveleditor.gridedit")
+LoveJam.LoadFile("leveleditor.le_keys")
 
 LoveJam.LoadFile("state_handler")
 LoveJam.LoadFile("states.state_mainmenu")
 LoveJam.LoadFile("states.state_game")
+LoveJam.LoadFile("states.state_nextlevel")
+
 LoveJam.LoadFile("states.state_leveledit")

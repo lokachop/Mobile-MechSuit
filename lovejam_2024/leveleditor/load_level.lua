@@ -55,6 +55,8 @@ function LKEdit.LoadLevel(name)
     cLevel.tiles = levelData.tiles
     LKEdit.RebuildVisTiles()
 
+    LKEdit.PushFrameLevelProps()
+
 
     print("Load complete for \"" .. name .. "\"")
 end
