@@ -65,6 +65,7 @@ TILE_SPAWN = LoveJam.DeclareTile({
     editorTex = "dev_spawn",
     onInit = function(x, y)
         LoveJam.SetMechPos(x, y)
+        LoveJam.SetMechAng(0)
     end
 })
 

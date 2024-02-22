@@ -9,11 +9,16 @@ local mechAngVis = Angle(0, 0, 0)
 local UniverseWorld = LvLK3D.GetUniverseByTag("UniverseWorld")
 
 local matForward = Matrix()
-function LoveJam.GetMechForward()
-    local mechAng = Angle(0, LoveJam.MechAng, 0)
-    matForward:SetAngles(mechAng)
+function LoveJam.GetMechCamAng()
+    return mechAngVis
+end
 
-    return matForward:Forward()
+function LoveJam.GetMechForward()
+    local mechAng = LoveJam.GetMechCamAng()
+    matForward:SetAngles(mechAng)
+    local fw = matForward:Forward()
+    fw[1] = -fw[1]
+    return fw
 end
 
 local forwardLUT = {
@@ -26,17 +31,36 @@ function LoveJam.GetForwardTileDir()
     return forwardLUT[LoveJam.MechAng]
 end
 
+local function getMechInterpolatedPos()
+    return mechPosVis
+end
+
 function LoveJam.GetMechCamPos()
-    return Vector(LoveJam.MechPos[1] * GRID_SZ, 3.4, LoveJam.MechPos[2] * GRID_SZ) + (LoveJam.GetMechForward() * 1.2)
+    return getMechInterpolatedPos() + Vector(0, 3.5, 0) + (LoveJam.GetMechForward() * 1.3)
 end
-function LoveJam.GetMechCamAng()
-    return Angle(0, LoveJam.MechAng, 0)
-end
+
 
 function LoveJam.GetMechViewPos()
-    return Vector(LoveJam.MechPos[1] * GRID_SZ, 3.05, LoveJam.MechPos[2] * GRID_SZ)
+    return getMechInterpolatedPos() + Vector(0, 3.05, 0)
 end
 
+function LoveJam.GetMechModelPos()
+    return getMechInterpolatedPos() + Vector(0, 2.85, 0)
+end
+
+function LoveJam.GetMechModelAng()
+    return mechAngVis
+end
+
+local isMoving = false
+local moveType = "none"
+function LoveJam.IsMechMoving()
+    return isMoving
+end
+
+function LoveJam.GetMechMovementType()
+    return moveType
+end
 
 
 function LoveJam.UpdateVisOnMechMove()
@@ -57,32 +81,127 @@ function LoveJam.UpdateVisOnMechMove()
             return
         end
 
-        local mechVisPos = Vector(LoveJam.MechPos[1] * GRID_SZ, 2.85, LoveJam.MechPos[2] * GRID_SZ)
-        LvLK3D.SetObjectPos(rHull, mechVisPos)
-        LvLK3D.SetObjectPos(rLegL, mechVisPos)
-        LvLK3D.SetObjectPos(rLegR, mechVisPos)
+        local visPos = LoveJam.GetMechModelPos()
+        LvLK3D.SetObjectPos(rHull, visPos)
+        LvLK3D.SetObjectPos(rLegL, visPos)
+        LvLK3D.SetObjectPos(rLegR, visPos)
 
-        local mechAng = Angle(0, LoveJam.MechAng, 0)
-        LvLK3D.SetObjectAng(rHull, mechAng)
-        LvLK3D.SetObjectAng(rLegL, mechAng)
-        LvLK3D.SetObjectAng(rLegR, mechAng)
+        local visAng = LoveJam.GetMechModelAng()
+        LvLK3D.SetObjectAng(rHull, visAng)
+        LvLK3D.SetObjectAng(rLegL, visAng)
+        LvLK3D.SetObjectAng(rLegR, visAng)
     LvLK3D.PopUniverse()
 end
 
-function LoveJam.MechMovementThink()
 
+
+local function lerp(t, a, b)
+    return a * (1 - math.min(t, 1)) + b * t
+end
+
+local function lerpVector(t, a, b)
+    return Vector(lerp(t, a[1], b[1]), lerp(t, a[2], b[2]), lerp(t, a[3], b[3]))
+end
+
+
+local lerpDeltaPos = 0
+local lerpStartPos = Vector(0, 0, 0)
+local lerpTargetPos = Vector(0, 0, 0)
+local function posLerpThink(dt)
+    if lerpDeltaPos >= 1 then
+        if moveType == "pos" then
+            isMoving = false
+        end
+
+        return
+    end
+
+    lerpDeltaPos = lerpDeltaPos + (dt * .25)
+    mechPosVis = lerpVector(lerpDeltaPos, lerpStartPos, lerpTargetPos)
+    mechPosVis[2] = math.abs(math.sin((lerpDeltaPos * 4) * math.pi) * .5)
+
+    LoveJam.UpdateVisOnMechMove()
+end
+
+local lerpDeltaAng = 0
+local lerpStartAng = 0
+local lerpTargetAng = 0
+local function angLerpThink(dt)
+    if lerpDeltaAng >= 1 then
+        if moveType == "ang" then
+            isMoving = false
+        end
+
+        return
+    end
+
+
+    lerpDeltaAng = lerpDeltaAng + (dt * .225)
+    mechAngVis = Angle(0, lerp(lerpDeltaAng, lerpStartAng, lerpTargetAng), 0)
+    LoveJam.UpdateVisOnMechMove()
 
 end
 
 
+function LoveJam.MechMovementInterpThink(dt)
+    posLerpThink(dt)
+    angLerpThink(dt)
+end
+
+
+function LoveJam.GetMechLerpTimers()
+    return lerpDeltaPos, lerpDeltaAng
+end
 
 
 function LoveJam.SetMechPos(x, y)
+    lerpStartPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
+    lerpTargetPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
+    mechPosVis = Vector(x * GRID_SZ, 0, y * GRID_SZ)
+    lerpDeltaPos = 1
+
+    LoveJam.MechPos = {x, y}
+    LoveJam.UpdateVisOnMechMove()
+end
+
+
+function LoveJam.SetMechPosLerped(x, y)
+    lerpStartPos = Vector(LoveJam.MechPos[1] * GRID_SZ, 0, LoveJam.MechPos[2] * GRID_SZ)
+    lerpTargetPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
+    lerpDeltaPos = 0
+    isMoving = true
+    moveType = "pos"
+
+
     LoveJam.MechPos = {x, y}
     LoveJam.UpdateVisOnMechMove()
 end
 
 function LoveJam.SetMechAng(ang)
+    lerpStartAng = ang
+    lerpTargetAng = ang
+    mechAngVis = Angle(0, ang, 0)
+    lerpDeltaAng = 1
+
+    LoveJam.MechAng = ang
+    LoveJam.UpdateVisOnMechMove()
+end
+
+function LoveJam.SetMechAngLerped(ang)
+    lerpStartAng = LoveJam.MechAng
+    lerpTargetAng = ang
+
+    if lerpStartAng == 270 and lerpTargetAng == 0 then
+        lerpTargetAng = 360
+    elseif lerpStartAng == 0 and lerpTargetAng == 270 then
+        lerpTargetAng = -90
+    end
+
+
+    lerpDeltaAng = 0
+    isMoving = true
+    moveType = "ang"
+
     LoveJam.MechAng = ang
     LoveJam.UpdateVisOnMechMove()
 end
@@ -97,7 +216,7 @@ function LoveJam.MoveMechForward()
     local tile = LoveJam.GetTileAtPos(newX, newY)
 
     if not tile then
-        LoveJam.SetMechPos(newX, newY) -- TODO make fancy
+        LoveJam.SetMechPosLerped(newX, newY) -- TODO make fancy
         return
     end
 
@@ -117,7 +236,7 @@ function LoveJam.MoveMechForward()
         end
     end
 
-    LoveJam.SetMechPos(newX, newY)
+    LoveJam.SetMechPosLerped(newX, newY)
 end
 
 local rotLUT = {
@@ -142,11 +261,11 @@ local rotLUT = {
 
 function LoveJam.RotateMechLeft()
     local nextAng = rotLUT[LoveJam.MechAng][1]
-    LoveJam.SetMechAng(nextAng)
+    LoveJam.SetMechAngLerped(nextAng)
 end
 
 
 function LoveJam.RotateMechRight()
     local nextAng = rotLUT[LoveJam.MechAng][2]
-    LoveJam.SetMechAng(nextAng)
+    LoveJam.SetMechAngLerped(nextAng)
 end

@@ -108,6 +108,7 @@ LvLK3D.PushUniverse(UniverseInterior)
 	LvLK3D.SetObjectFlag(screenCam, "SHADING_SMOOTH", false)
 	LvLK3D.SetObjectFlag(screenCam, "NORM_INVERT", false)
 	LvLK3D.SetObjectFlag(screenCam, "FULLBRIGHT", true)
+	LvLK3D.SetObjectShader(screenCam, "cam")
 	LvLK3D.UpdateObjectMesh(screenCam)
 
 

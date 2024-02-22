@@ -34,6 +34,8 @@ function state.onThink(dt)
 	if not DO_NOCLIP then
 		LoveJam.ViewThink(dt)
 		LoveJam.InternalViewThink(dt)
+		LoveJam.MechMovementInterpThink(dt)
+		LoveJam.SoundInteriorThink(dt)
 	end
 	LoveJam.TerminalFlashThink()
 end
@@ -42,17 +44,20 @@ end
 function state.onRender()
 	love.graphics.clear(true, true, true)
 
-	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
 
 	local prevCamAng = LvLK3D.CamAng
 	local mechCamAng = LoveJam.GetMechCamAng()
 	local newRealAng = LvLK3D.CamAng - LoveJam.GetMechCamAng()
 
 
+	local rtCamRealAng = LoveJam.CameraAng - LoveJam.GetMechCamAng()
+
+	LvLK3D.BuildProjectionMatrix(1, 0.01, 1000)
 	LvLK3D.PushRenderTarget(RTCamera)
 		local prevCam = LvLK3D.CamPos
 		LvLK3D.Clear(.1, .1, .2)
 		LvLK3D.SetCamPos(LoveJam.GetMechCamPos())
+		LvLK3D.SetCamAng(rtCamRealAng)
 
 		LvLK3D.PushUniverse(UniverseWorld)
 			LvLK3D.RenderActiveUniverse()
@@ -117,6 +122,10 @@ function state.onMouseMoved(mx, my, dx, dy)
 	if DO_NOCLIP then
 		LvLK3D.MouseCamUpdate(dx, dy)
 	else
+		if LoveJam.ViewMouseMoved(mx, my, dx, dy) then -- captured
+			return
+		end
+
 		LoveJam.MouseZoneHandle(mx, my)
 	end
 end

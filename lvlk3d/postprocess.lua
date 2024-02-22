@@ -198,3 +198,36 @@ LvLK3D.DeclareNewPPEffect("blur", {
 
     end
 })
+
+local shaderCRT = love.graphics.newShader(LvLK3D.RelaPath .. "/shader/screen/crt.frag")
+LvLK3D.DeclareNewPPEffect("crt", {
+    ["parameteri"] = {
+        ["warp"] = 0.75,
+        ["scan"] = 0.75,
+    },
+    ["buffers"] = {},
+    ["onRender"] = function(buffers, parameteri)
+        local w, h = love.graphics.getDimensions()
+        local curr = love.graphics.getCanvas()
+        local cw, ch = curr:getDimensions()
+
+
+        local warp = parameteri["warp"]
+        local scan = parameteri["scan"]
+
+
+        love.graphics.setShader(shaderCRT)
+        shaderCRT:send("warp", warp)
+        shaderCRT:send("scan", scan)
+        shaderCRT:send("screenSize", {cw, ch})
+
+
+
+        love.graphics.setCanvas(curr)
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.setBlendMode("alpha", "premultiplied")
+            love.graphics.draw(rot and buffB or buffA, 0, 0, 0, w / bw, h / bh)
+        love.graphics.setBlendMode("alpha")
+        love.graphics.setShader()
+    end
+})

@@ -19,6 +19,7 @@ LoveJam.LoadFile("world")
 LoveJam.LoadFile("radio")
 LoveJam.LoadFile("movement")
 LoveJam.LoadFile("gameplay")
+LoveJam.LoadFile("sound_interior")
 
 LoveJam.LoadFile("view_manager")
 LoveJam.LoadFile("views.view_general")

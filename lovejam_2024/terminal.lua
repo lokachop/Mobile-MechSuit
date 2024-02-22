@@ -4,7 +4,12 @@ LvLK3D = LvLK3D or {}
 local fontLarge = love.graphics.newFont(64)
 local fontSz = 16
 local fontSmall = love.graphics.newFont("fonts/terminal.ttf", fontSz, "mono")
-LvLK3D.NewTextureFunc("terminal_tex", 512, 512, function()
+local termSize = 512
+
+local canvasTerm = love.graphics.newCanvas(termSize, termSize)
+canvasTerm:setFilter("nearest", "nearest")
+
+LvLK3D.NewTextureFunc("terminal_tex", termSize, termSize, function()
 	local okSpacing = string.rep(" ", 6)
 	love.graphics.clear(0.0, 0.05, 0.0, 1, true, true)
 	love.graphics.setColor(0, 1, 0)
@@ -20,16 +25,19 @@ end)
 LvLK3D.SetTextureFilter("terminal_tex", "nearest", "nearest")
 
 
+
+
+
 local lineCount = 32
 local terminalBuffer = {}
+local shaderCRT = love.graphics.newShader(LvLK3D.RelaPath .. "/shader/screen/crt.frag")
 local function refreshTerminal()
-	LvLK3D.RenderTexture("terminal_tex", function()
-		local w, h = love.graphics.getCanvas():getDimensions()
+	love.graphics.setCanvas(canvasTerm)
 		love.graphics.clear(0.0, 0.05, 0.0, 1, true, true)
 
 
 		love.graphics.setColor(0, 1, 0)
-		local yBuff = h - fontSz - 2
+		local yBuff = termSize - fontSz - 2
 		for i = #terminalBuffer, 1, -1 do
 			local val = terminalBuffer[i]
 			if not val then
@@ -39,6 +47,23 @@ local function refreshTerminal()
 			love.graphics.print(val, fontSmall, 0, yBuff)
 			yBuff = yBuff - fontSz
 		end
+	love.graphics.setCanvas()
+
+
+
+	LvLK3D.RenderTexture("terminal_tex", function()
+		love.graphics.clear(0.0, 0.0, 0.0, 1, true, true)
+		love.graphics.setColor(1, 1, 1, 1)
+
+		local warp = 0
+		local scan = .75
+
+		love.graphics.setShader(shaderCRT)
+		shaderCRT:send("warp", warp)
+		shaderCRT:send("scan", scan)
+		shaderCRT:send("screenSize", {termSize, termSize})
+		love.graphics.draw(canvasTerm, 0, 0)
+		love.graphics.setShader()
 	end)
 end
 
@@ -172,9 +197,16 @@ newCommand("clear", {
 newCommand("forward", {
 	desc = "Moves the mech forward",
 	onFirst = function()
+		setCommandState("none")
+
+		if LoveJam.IsMechMoving() then
+			LoveJam.PushMessageToTerminal("Mech is still moving, aborting!")
+			return
+		end
+
+
 		LoveJam.PushMessageToTerminal("Moving forward!")
 		LoveJam.MoveMechForward()
-		setCommandState("none")
 	end,
 	onEnter = function(msg)
 	end,
@@ -183,9 +215,15 @@ newCommand("forward", {
 newCommand("left", {
 	desc = "Rotates the mech left",
 	onFirst = function()
+		setCommandState("none")
+
+		if LoveJam.IsMechMoving() then
+			LoveJam.PushMessageToTerminal("Mech is still moving, aborting!")
+			return
+		end
+
 		LoveJam.PushMessageToTerminal("Rotating left!")
 		LoveJam.RotateMechLeft()
-		setCommandState("none")
 	end,
 	onEnter = function(msg)
 	end,
@@ -194,9 +232,15 @@ newCommand("left", {
 newCommand("right", {
 	desc = "Rotates the mech right",
 	onFirst = function()
-		LoveJam.PushMessageToTerminal("Rotating righ!")
-		LoveJam.RotateMechRight()
 		setCommandState("none")
+
+		if LoveJam.IsMechMoving() then
+			LoveJam.PushMessageToTerminal("Mech is still moving, aborting!")
+			return
+		end
+
+		LoveJam.PushMessageToTerminal("Rotating right!")
+		LoveJam.RotateMechRight()
 	end,
 	onEnter = function(msg)
 	end,

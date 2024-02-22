@@ -39,7 +39,7 @@ local function moveTowards(a, b, delta)
 end
 
 function LoveJam.InternalViewThink(dt)
-    local tVal = dt * 1
+    local tVal = dt * 2
 
     local vt = LoveJam.ViewTarget
     local nx, ny, nz = moveTowards3D(CurrView[1], CurrView[2], CurrView[3], vt[1], vt[2], vt[3], tVal)
@@ -67,6 +67,7 @@ function LoveJam.NewView(name)
         onThink = function(dt) end,
         onDraw = function() end,
         onKeyPressed = function(key) end,
+        onMouseMoved = function(mx, my, dx, dy) end,
         name = name
     }
 
@@ -111,7 +112,7 @@ local function canSwitchView()
 end
 
 local function applyNextSwitch()
-    nextSwitch = CurTime + .75
+    nextSwitch = CurTime + (.75 * .5)
 
     local sw, sh = love.graphics.getDimensions()
     love.mouse.setPosition(sw * .5, sh * .5)
@@ -166,6 +167,11 @@ end
 function LoveJam.ViewKeyPressed(key)
     local view = LoveJam.GetViewByName(currView)
     view.onKeyPressed(key)
+end
+
+function LoveJam.ViewMouseMoved(mx, my, dx, dy)
+    local view = LoveJam.GetViewByName(currView)
+    return view.onMouseMoved(mx, my, dx, dy)
 end
 
 
