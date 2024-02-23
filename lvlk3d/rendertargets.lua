@@ -82,7 +82,6 @@ function LvLK3D.RenderRTFullScreen(rt)
     love.graphics.setCanvas(curr)
 
 
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setBlendMode("alpha", "premultiplied")
     love.graphics.draw(currRT, 0, 0, 0, w / rtW, h / rtH)
     love.graphics.setBlendMode("alpha")

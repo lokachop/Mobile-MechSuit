@@ -14,6 +14,13 @@ function LKEdit.LoadLevel(name)
     LKEdit.CurrLevel = LKEdit.NewLevel(name)
     local cLevel = LKEdit.CurrLevel
     cLevel.name = levelData.name or "no-name"
+    cLevel.nextLevel = levelData.nextLevel or "none"
+    cLevel.isNoVis = levelData.isNoVis
+    if cLevel.isNoVis == nil then
+        cLevel.isNoVis = false
+    end
+
+
     cLevel.gW = levelData.gW or 0
     cLevel.gH = levelData.gH or 0
     cLevel.gOX = levelData.gOX or 0
@@ -51,6 +58,8 @@ function LKEdit.LoadLevel(name)
 
         LKEdit.UpdateLight(lID)
     end
+
+    cLevel.tiles = {}
 
     cLevel.tiles = levelData.tiles
     LKEdit.RebuildVisTiles()

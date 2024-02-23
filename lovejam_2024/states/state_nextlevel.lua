@@ -74,6 +74,7 @@ function state.onRender()
 		["amount"] = 0.004,
 	})
 
+	love.graphics.setColor(1, 1, 1, 1)
 	LvLK3D.RenderRTFullScreen(RTNextLevel)
 end
 

@@ -53,7 +53,7 @@ LvLK3D.SetTextureFilter("dev_block", "nearest", "nearest")
 LvLK3D.NewTexturePNG("dev_kill", "textures/dev/kill.png")
 LvLK3D.SetTextureFilter("dev_kill", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png")
+LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png") 
 LvLK3D.SetTextureFilter("dev_spawn", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("dev_end", "textures/dev/end.png")
@@ -73,20 +73,35 @@ LvLK3D.SetTextureFilter("silo_sheet", "nearest", "nearest")
 LvLK3D.NewTexturePNG("bronze", "textures/lefton/lokajam_bronze_new.png")
 LvLK3D.SetTextureFilter("bronze", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("grate1", "textures/lefton/lokajam_gratefloor_1.png")
+LvLK3D.NewTexturePNG("grate1", "textures/lefton/metal/lokajam_gratefloor_1.png")
 LvLK3D.SetTextureFilter("grate1", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("grate2", "textures/lefton/lokajam_gratefloor_2.png")
+LvLK3D.NewTexturePNG("grate2", "textures/lefton/metal/lokajam_gratefloor_2.png")
 LvLK3D.SetTextureFilter("grate2", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("metal_floor1", "textures/lefton/lokajam_metal_floor_1.png")
+LvLK3D.NewTexturePNG("metal_floor1", "textures/lefton/metal/lokajam_metal_floor_1.png")
 LvLK3D.SetTextureFilter("metal_floor1", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("metal_wall1", "textures/lefton/lokajam_metal_wall_1.png")
+LvLK3D.NewTexturePNG("metal_wall1", "textures/lefton/metal/lokajam_metal_wall_1.png")
 LvLK3D.SetTextureFilter("metal_wall1", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("metal_wall2", "textures/lefton/lokajam_metal_wall_stack.png")
+LvLK3D.NewTexturePNG("metal_wall2", "textures/lefton/metal/lokajam_metal_wall_2.png")
 LvLK3D.SetTextureFilter("metal_wall2", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("toxic", "textures/lefton/toxic_waste.png")
+LvLK3D.NewTexturePNG("metal_wall3", "textures/lefton/metal/lokajam_metal_wall_3.png")
+LvLK3D.SetTextureFilter("metal_wall3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("metal_wall_stack1", "textures/lefton/metal/lokajam_metal_wall_stack.png")
+LvLK3D.SetTextureFilter("metal_wall_stack1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("metal_wall_stack2", "textures/lefton/metal/lokajam_metal_wall_stack_2.png")
+LvLK3D.SetTextureFilter("metal_wall_stack2", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("metal_wall_stack3", "textures/lefton/metal/lokajam_metal_wall_stack_3.png")
+LvLK3D.SetTextureFilter("metal_wall_stack3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("toxic", "textures/lefton/misc/toxic_waste.png")
 LvLK3D.SetTextureFilter("toxic", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("chain", "textures/lefton/misc/lokajam_rusty_chain.png")
+LvLK3D.SetTextureFilter("chain", "nearest", "nearest")

@@ -249,6 +249,7 @@ function state.onRender()
 		["passes"] = 6,
 		["amount"] = currBlur,
 	})
+	love.graphics.setColor(1, 1, 1, 1)
 	LvLK3D.RenderRTFullScreen(RTMainMenu)
 end
 

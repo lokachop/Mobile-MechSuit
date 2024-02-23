@@ -31,7 +31,9 @@ LoveJam.LoadFile("level_handler")
 LoveJam.LoadFile("levels.leveltest")
 LoveJam.LoadFile("levels.tiletest")
 LoveJam.LoadFile("levels.level1test")
+
 LoveJam.LoadFile("levels.level1")
+LoveJam.LoadFile("levels.level2")
 
 
 --[[

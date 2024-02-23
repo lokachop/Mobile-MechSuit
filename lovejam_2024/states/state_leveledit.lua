@@ -15,6 +15,8 @@ local UniverseEditLights = LvLK3D.GetUniverseByTag("UniverseEditLights")
 local RTLevelEdit = LvLK3D.NewRenderTarget("RenderTargetLevelEdit", sw, sh)
 LvLK3D.SetRenderTargetFilter(RTLevelEdit, "nearest", "nearest")
 
+local RTLevelEditWorld = LvLK3D.NewRenderTarget("RenderTargetLevelEdit", sw, sh)
+LvLK3D.SetRenderTargetFilter(RTLevelEditWorld, "nearest", "nearest")
 
 
 
@@ -45,21 +47,26 @@ function state.onRender()
 			LvLK3D.RenderActiveUniverse()
 		LvLK3D.PopUniverse()
 
+	LvLK3D.PopRenderTarget()
 
-		if not LKEdit.GridEdit then
-			LvLK3D.ClearDepth()
-			LvLK3D.PushUniverse(UniverseEdit)
-				LvLK3D.RenderActiveUniverse()
-			LvLK3D.PopUniverse()
+	LvLK3D.PushRenderTarget(RTLevelEditWorld)
+	LvLK3D.Clear(0, 0, 0)
+		LvLK3D.PushUniverse(UniverseEdit)
+			LvLK3D.RenderActiveUniverse()
+		LvLK3D.PopUniverse()
 
-			LvLK3D.PushUniverse(UniverseEditLights)
-				LvLK3D.RenderActiveUniverse()
-			LvLK3D.PopUniverse()
-		end
+		LvLK3D.PushUniverse(UniverseEditLights)
+			LvLK3D.RenderActiveUniverse()
+		LvLK3D.PopUniverse()
 	LvLK3D.PopRenderTarget()
 
 	love.graphics.setColor(1, 1, 1, 1)
 	LvLK3D.RenderRTFullScreen(RTLevelEdit)
+
+	if LKEdit.GridEdit then
+		love.graphics.setColor(1, 1, 1, 0.5)
+	end
+	LvLK3D.RenderRTFullScreen(RTLevelEditWorld)
 
 	if LvLK3D.CamInputLock then
 		love.graphics.setColor(0, 0, 0, 1)
@@ -116,7 +123,7 @@ function state.onEnter()
 	--})
 	love.mouse.setGrabbed(false)
 	LvLK3D.FOV = 90
-	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
+	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
 	initUI()
 end
 

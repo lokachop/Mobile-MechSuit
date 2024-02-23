@@ -98,5 +98,6 @@ function LKEdit.PushFrameLevelProps()
 	c_noVisLevel:SetValue(LKEdit.CurrLevel.isNoVis)
 
 	local e_nextLevel = LKEdit.FLevelInfo:GetChild("e_nextLevel")
+	print(LKEdit.CurrLevel.nextLevel)
 	e_nextLevel:SetText(LKEdit.CurrLevel.nextLevel)
 end

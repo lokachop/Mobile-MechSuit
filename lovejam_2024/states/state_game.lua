@@ -52,7 +52,7 @@ function state.onRender()
 
 	local rtCamRealAng = LoveJam.CameraAng - LoveJam.GetMechCamAng()
 
-	LvLK3D.BuildProjectionMatrix(1, 0.01, 1000)
+	LvLK3D.BuildProjectionMatrix(1, 0.01, 10000)
 	LvLK3D.PushRenderTarget(RTCamera)
 		local prevCam = LvLK3D.CamPos
 		LvLK3D.Clear(.1, .1, .2)
@@ -69,7 +69,7 @@ function state.onRender()
 	LvLK3D.PopRenderTarget()
 
 
-	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
+	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
 	LvLK3D.PushRenderTarget(RTGame)
 		LvLK3D.Clear(.1, .1, .2)
 
@@ -102,6 +102,7 @@ function state.onRender()
 		LvLK3D.PopUniverse()
 	LvLK3D.PopRenderTarget()
 
+	love.graphics.setColor(1, 1, 1, 1)
 	LvLK3D.RenderRTFullScreen(RTGame)
 
 
@@ -138,10 +139,10 @@ end
 function state.onEnter()
 	LoveJam.StartRadio()
 	LvLK3D.FOV = 90
-	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
+	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
 	print("Init")
 
-	LoveJam.LoadLevel("level1")
+	LoveJam.LoadLevel("level2")
 end
 
 function state.onExit()

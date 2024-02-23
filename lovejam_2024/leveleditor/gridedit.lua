@@ -38,6 +38,22 @@ function LKEdit.RebuildVisTiles()
 		return
 	end
 
+	LvLK3D.PushUniverse(UniverseEditPlaneRef)
+		LvLK3D.ClearUniverse()
+		local pFloorRef = LvLK3D.AddObjectToUniv("planeCursor", "plane")
+		LvLK3D.SetObjectPos(pFloorRef, Vector(0, 0, 0))
+		LvLK3D.SetObjectCol(pFloorRef, {0, 1, 0.25})
+		LvLK3D.SetObjectScl(pFloorRef, Vector(GRID_SZ * .5, 1, GRID_SZ * .5))
+		LvLK3D.SetObjectMat(pFloorRef, "white")
+		LvLK3D.SetObjectFlag(pFloorRef, "FULLBRIGHT", true)
+		LvLK3D.SetObjectBlend(pFloorRef, "add")
+		LvLK3D.UpdateObjectMesh(pFloorRef)
+	LvLK3D.PopUniverse()
+
+
+
+
+
 	for k, v in pairs(cLevel.tiles) do
 		for k2, v2 in pairs(v) do
 			local tParams = LoveJam.GetTileParams(v2)
@@ -84,7 +100,7 @@ end
 function LKEdit.GEPaint()
 	local w, h = love.graphics.getDimensions()
 
-	printShadow("GEdit keys; \nkp-/kp+:zoom in / out\nkp8/kp5/kp4/kp6: move\n1: Tile ground\n2: Tile wall\n3: Tile kill\n4: Tile spawn", w * .5, 64)
+	printShadow("GEdit keys; \nkp-/kp+:zoom in / out\nkp8/kp5/kp4/kp6: move\n1: Tile ground\n2: Tile wall\n3: Tile kill\n4: Tile spawn\n5: Tile End", w * .5, 64)
 end
 
 

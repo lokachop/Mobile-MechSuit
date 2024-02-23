@@ -129,6 +129,10 @@ function LKEdit.SelectLookAtHandle(key)
         return
     end
 
+    if not LvLK3D.CamInputLock then
+        return
+    end
+
     LvLK3D.PushUniverse(UniverseEdit)
         local objE, distE = selectInView()
     LvLK3D.PopUniverse()
