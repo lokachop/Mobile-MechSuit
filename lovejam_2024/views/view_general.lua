@@ -30,6 +30,9 @@ LoveJam.NewZone(view, {
 function view.onEnter()
     LoveJam.ViewTarget = Vector(0, -.725, 1.1)
     LoveJam.AngTarget = Angle(0, 0, 0)
+    LoveJam.TutoSendTrigger("tutoGlass1")
+    LoveJam.TutoSendTrigger("tutoGlass3")
+    LoveJam.TutoSendTrigger("tutoCam2")
 end
 
 function view.onExit()

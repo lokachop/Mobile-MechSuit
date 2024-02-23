@@ -107,6 +107,7 @@ function state.onRender()
 
 
 	LoveJam.ViewRender()
+	LoveJam.RenderTutorial()
 	LoveJam.RenderZones()
 end
 
@@ -141,8 +142,6 @@ function state.onEnter()
 	LvLK3D.FOV = 90
 	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
 	print("Init")
-
-	LoveJam.LoadLevel("level2")
 end
 
 function state.onExit()

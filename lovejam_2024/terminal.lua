@@ -166,6 +166,7 @@ newCommand("username", {
 		username = msg
 		head = username .. "@mech0> "
 		setCommandState("none")
+		LoveJam.TutoSendTrigger("tutoTerminal")
 	end,
 })
 
@@ -178,6 +179,7 @@ newCommand("help", {
 			LoveJam.PushMessageToTerminal("    " .. v.desc)
 		end
 		setCommandState("none")
+		LoveJam.TutoSendTrigger("tutoCommands")
 	end,
 	onEnter = function(msg)
 	end,
@@ -205,8 +207,14 @@ newCommand("forward", {
 		end
 
 
-		LoveJam.PushMessageToTerminal("Moving forward!")
-		LoveJam.MoveMechForward()
+		local moved = LoveJam.MoveMechForward()
+		if moved then
+			LoveJam.PushMessageToTerminal("Moving forward!")
+		else
+			LoveJam.PushMessageToTerminal("Obstacle detected, halting...")
+		end
+
+		LoveJam.TutoSendTrigger("tutoMove")
 	end,
 	onEnter = function(msg)
 	end,

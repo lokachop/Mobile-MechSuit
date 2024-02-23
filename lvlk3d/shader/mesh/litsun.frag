@@ -22,6 +22,10 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {
     vec4 texturecolor = Texel(tex, texture_coords);
     vec4 final = texturecolor * color;
 
+    if (final.a == 0.0) {
+        discard;
+    }
+
     vec3 fragPos = vec3(worldPosition);
 
     vec3 diffuse = lightColour;

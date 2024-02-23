@@ -53,7 +53,10 @@ LvLK3D.SetTextureFilter("dev_block", "nearest", "nearest")
 LvLK3D.NewTexturePNG("dev_kill", "textures/dev/kill.png")
 LvLK3D.SetTextureFilter("dev_kill", "nearest", "nearest")
 
-LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png") 
+LvLK3D.NewTexturePNG("dev_kill_fall", "textures/dev/kill_fall.png")
+LvLK3D.SetTextureFilter("dev_kill_fall", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("dev_spawn", "textures/dev/spawn.png")
 LvLK3D.SetTextureFilter("dev_spawn", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("dev_end", "textures/dev/end.png")
@@ -100,8 +103,41 @@ LvLK3D.SetTextureFilter("metal_wall_stack2", "nearest", "nearest")
 LvLK3D.NewTexturePNG("metal_wall_stack3", "textures/lefton/metal/lokajam_metal_wall_stack_3.png")
 LvLK3D.SetTextureFilter("metal_wall_stack3", "nearest", "nearest")
 
+LvLK3D.NewTexturePNG("concrete1", "textures/lefton/concrete/lokajam_smooth_concrete_1.png")
+LvLK3D.SetTextureFilter("concrete1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("concrete2", "textures/lefton/concrete/lokajam_smooth_concrete_2.png")
+LvLK3D.SetTextureFilter("concrete2", "nearest", "nearest")
+
+
+LvLK3D.NewTexturePNG("tile1", "textures/lefton/tile/lokajam_metaltile_1.png")
+LvLK3D.SetTextureFilter("tile1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("tile2", "textures/lefton/tile/lokajam_roughtile_1.png")
+LvLK3D.SetTextureFilter("tile2", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("tile3", "textures/lefton/tile/lokajam_small_metaltile_1.png")
+LvLK3D.SetTextureFilter("tile3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("tile4", "textures/lefton/tile/lokajam_small_metaltile_2.png")
+LvLK3D.SetTextureFilter("tile4", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("sign1", "textures/lefton/sign/lokajam_radsign_1.png")
+LvLK3D.SetTextureFilter("sign1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("sign2", "textures/lefton/sign/lokajam_radsign_2.png")
+LvLK3D.SetTextureFilter("sign2", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("sign3", "textures/lefton/sign/lokajam_warnsign_1.png")
+LvLK3D.SetTextureFilter("sign3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("sign4", "textures/lefton/sign/lokajam_warnsign_2.png")
+LvLK3D.SetTextureFilter("sign4", "nearest", "nearest")
+
+
 LvLK3D.NewTexturePNG("toxic", "textures/lefton/misc/toxic_waste.png")
 LvLK3D.SetTextureFilter("toxic", "nearest", "nearest")
 
 LvLK3D.NewTexturePNG("chain", "textures/lefton/misc/lokajam_rusty_chain.png")
 LvLK3D.SetTextureFilter("chain", "nearest", "nearest")
+

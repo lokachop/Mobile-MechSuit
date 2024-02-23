@@ -20,6 +20,7 @@ LoveJam.LoadFile("radio")
 LoveJam.LoadFile("movement")
 LoveJam.LoadFile("gameplay")
 LoveJam.LoadFile("sound_interior")
+LoveJam.LoadFile("tutorial")
 
 LoveJam.LoadFile("view_manager")
 LoveJam.LoadFile("views.view_general")
@@ -32,6 +33,7 @@ LoveJam.LoadFile("levels.leveltest")
 LoveJam.LoadFile("levels.tiletest")
 LoveJam.LoadFile("levels.level1test")
 
+LoveJam.LoadFile("levels.level_tuto")
 LoveJam.LoadFile("levels.level1")
 LoveJam.LoadFile("levels.level2")
 

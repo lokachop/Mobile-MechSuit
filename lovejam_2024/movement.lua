@@ -116,7 +116,7 @@ local function posLerpThink(dt)
         return
     end
 
-    lerpDeltaPos = lerpDeltaPos + (dt * .25)
+    lerpDeltaPos = lerpDeltaPos + ((dt * .25) * MECH_MOVE_MUL)
     mechPosVis = lerpVector(lerpDeltaPos, lerpStartPos, lerpTargetPos)
     mechPosVis[2] = math.abs(math.sin((lerpDeltaPos * 4) * math.pi) * .5)
 
@@ -136,7 +136,7 @@ local function angLerpThink(dt)
     end
 
 
-    lerpDeltaAng = lerpDeltaAng + (dt * .225)
+    lerpDeltaAng = lerpDeltaAng + ((dt * .225) * MECH_ROTATE_MUL)
     mechAngVis = Angle(0, lerp(lerpDeltaAng, lerpStartAng, lerpTargetAng), 0)
     LoveJam.UpdateVisOnMechMove()
 
@@ -217,26 +217,28 @@ function LoveJam.MoveMechForward()
 
     if not tile then
         LoveJam.SetMechPosLerped(newX, newY) -- TODO make fancy
-        return
+        return true
     end
 
     local tParams = LoveJam.GetTileParams(tile)
     if not tParams then
-        return
+        return false
     end
 
     if tParams.solid then
-        return
+        return false
     end
 
     if tParams.onStep then
         local stop = tParams.onStep()
         if stop then
-            return
+            return false
         end
     end
 
     LoveJam.SetMechPosLerped(newX, newY)
+
+    return true
 end
 
 local rotLUT = {

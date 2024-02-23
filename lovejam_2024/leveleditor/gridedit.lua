@@ -100,7 +100,7 @@ end
 function LKEdit.GEPaint()
 	local w, h = love.graphics.getDimensions()
 
-	printShadow("GEdit keys; \nkp-/kp+:zoom in / out\nkp8/kp5/kp4/kp6: move\n1: Tile ground\n2: Tile wall\n3: Tile kill\n4: Tile spawn\n5: Tile End", w * .5, 64)
+	printShadow("GEdit keys; \nkp-/kp+:zoom in / out\nkp8/kp5/kp4/kp6: move\n1: Tile ground\n2: Tile wall\n3: Tile kill\n4: Tile spawn\n5: Tile End\n6: Kill Fall", w * .5, 64)
 end
 
 
@@ -144,6 +144,10 @@ function LKEdit.GEKeys(key)
 
 	if key == "5" then
 		addTileToLevel(GridEditTarget[1], GridEditTarget[2], TILE_END)
+	end
+
+	if key == "6" then
+		addTileToLevel(GridEditTarget[1], GridEditTarget[2], TILE_KILL_FALL)
 	end
 end
 

@@ -114,3 +114,12 @@ function LoveJam.GetTileAtPos(x, y)
 
     return LoveJam.ActiveLevelGrid[x][y]
 end
+
+
+function LoveJam.GetCurrentLevelName()
+    return LoveJam.ActiveLevel
+end
+
+function LoveJam.GetCurrentLevelData()
+    return LoveJam.LevelList[LoveJam.ActiveLevel]
+end

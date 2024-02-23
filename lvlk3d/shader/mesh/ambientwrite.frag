@@ -17,7 +17,13 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {
 
     vec4 texturecolor = Texel(tex, texture_coords);
 
-    return texturecolor * color * vec4(ambientCol, 1.0);
+    vec4 final = texturecolor * color;
+    if (final.a == 0.0) {
+        discard;
+    }
+
+
+    return final * vec4(ambientCol, 1.0);
 
    
     //return vec4((vertexNormal + vec3(1, 1, 1)) * 0.5, 1.0) * color;

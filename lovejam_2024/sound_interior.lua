@@ -2,11 +2,11 @@ LoveJam = LoveJam or {}
 LvLK3D = LvLK3D or {}
 
 local prevMove = false
-local moveSoundSource = LvLK3D.PlaySound3D("sounds/mech/move.wav", Vector(0, -2, 0), 1, 8)
+local moveSoundSource = LvLK3D.PlaySound3D("sounds/mech/move.wav", Vector(0, -2, 0), 1 * MECH_MOVE_MUL, 8)
 moveSoundSource:setLooping(true)
 
 
-local rotateSoundSource = LvLK3D.PlaySound3D("sounds/mech/rotates.wav", Vector(0, -2, 0), 1, 8)
+local rotateSoundSource = LvLK3D.PlaySound3D("sounds/mech/rotates.wav", Vector(0, -2, 0), 1 * MECH_ROTATE_MUL, 8)
 
 local function setMoveSound(state)
     if state == true then
@@ -18,6 +18,7 @@ end
 
 local function setRotSound(state)
     if state == true then
+        rotateSoundSource:stop()
         rotateSoundSource:play()
     end
 end

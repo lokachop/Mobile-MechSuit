@@ -30,6 +30,8 @@ local function openUI()
 	buttonNext:SetColourOverride({0.25, 0.5, 0.25}, {0.1, 0.25, 0.1}, {0.5, 1, 0.5})
 	buttonNext:SetOnClick(function(elm, mx, my)
 		frameNextMap:Remove()
+		LoveJam.SwitchToNextLevel(name)
+		LoveJam.SetState(STATE_GAME)
 	end)
 	LvLKUI.PushElement(buttonNext, frameNextMap)
 

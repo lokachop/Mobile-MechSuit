@@ -112,6 +112,7 @@ local function onStart()
 	endMusic()
 	LvLKUI.RemoveElement("panel_mainmenu")
 	LoveJam.SetState(STATE_GAME)
+	LoveJam.LoadLevel("level_tuto")
 end
 
 local function onCredits()

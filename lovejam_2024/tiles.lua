@@ -74,4 +74,14 @@ TILE_END = LoveJam.DeclareTile({
     solid = false,
     harmful = true,
     editorTex = "dev_end",
+    onStep = function(x, y)
+        LoveJam.SetState(STATE_NEXTLEVEL)
+    end
+})
+
+TILE_KILL_FALL = LoveJam.DeclareTile({
+    name = "kill_fall",
+    solid = false,
+    harmful = true,
+    editorTex = "dev_kill_fall",
 })
