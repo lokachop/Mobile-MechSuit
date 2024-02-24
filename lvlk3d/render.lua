@@ -4,6 +4,11 @@ local _MAX_OBJECTS = LvLK3D.MAX_OBJECTS * 1
 
 
 local function renderObject(obj, shaderOverride)
+	if obj["HIDDEN"] then
+		return
+	end
+
+
 	local shader = shaderOverride or LvLK3D.CurrShader
 	if obj.cShader ~= nil then
 		shader = LvLK3D.GetShader(obj.cShader)
@@ -161,9 +166,23 @@ local function renderActiveUniverseLit()
 
 	-- now we loop thru each light
 	for k, v in pairs(LvLK3D.CurrUniv["lights"]) do
+		-- dist cont
+		local int1 = 1 / v.intensity
+		local int2 = int1 * int1
+
+
+
+
 		love.graphics.clear(false, true, false)
 		for i = 1, #_renderShadowed do
+			if v.pos:Distance(_renderShadowed[i].pos) > (int2 * int2) then
+				goto _skipobj1
+			end
+
+
+
 			renderShadowed(_renderShadowed[i], v.pos, depthWriteShader)
+			::_skipobj1::
 		end
 
 		-- shadow volume cutouts done! render with lights...
@@ -181,6 +200,8 @@ local function renderActiveUniverseLit()
 				end
 			end
 		love.graphics.setStencilTest()
+
+		::_skiplight1::
 	end
 
 
@@ -205,7 +226,7 @@ local function renderActiveUniverseNonLit()
 	for i = 1, _MAX_OBJECTS do
 		local obj = LvLK3D.CurrUniv["objects"][i]
 
-		if obj then
+		if obj and not obj["HIDDEN"] then
 			love.graphics.setDepthMode("lequal", true)
 			renderObject(obj)
 		end

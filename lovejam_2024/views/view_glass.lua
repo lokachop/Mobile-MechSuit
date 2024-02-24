@@ -14,6 +14,7 @@ LoveJam.NewZone(view, {
 
 local yawTarget = 0
 function view.onEnter()
+    LoveJam.IsOnGlass = true
     LoveJam.ViewTarget = Vector(0, 0, 0)
     LoveJam.AngTarget = Angle(0, 0, 0)
     LoveJam.TutoSendTrigger("tutoGlass2")
@@ -21,6 +22,7 @@ end
 
 function view.onExit()
     yawTarget = 0
+    LoveJam.IsOnGlass = false
 end
 
 

@@ -133,9 +133,14 @@ end
 
 local function handleCommandEnter()
 	cmdTarget = commandState
+	params = ""
 
 	if commandState == "none" then
-		cmdTarget = string.lower(cBuff)
+		local cGrab = string.lower(cBuff)
+		local cmd, args = string.match(cGrab, "([^ ]+) ?(.*)$")
+
+		cmdTarget = cmd
+		params = args
 	end
 
 	local cmd = commandTable[cmdTarget]
@@ -146,7 +151,7 @@ local function handleCommandEnter()
 
 	if commandState ~= cmdTarget then
 		setCommandState(cmdTarget)
-		cmd.onFirst(cBuff)
+		cmd.onFirst(cBuff, params)
 	else
 		cmd.onEnter(cBuff)
 	end
@@ -155,7 +160,7 @@ end
 
 newCommand("username", {
 	desc = "Changes your username",
-	onFirst = function()
+	onFirst = function(msg, args)
 		LoveJam.PushMessageToTerminal("Please enter your username.")
 	end,
 	onEnter = function(msg)
@@ -172,7 +177,7 @@ newCommand("username", {
 
 newCommand("help", {
 	desc = "Displays list of commands",
-	onFirst = function()
+	onFirst = function(msg, args)
 		LoveJam.PushMessageToTerminal("--==Commands==--")
 		for k, v in pairs(commandTable) do
 			LoveJam.PushMessageToTerminal("[" .. k .. "]")
@@ -187,7 +192,7 @@ newCommand("help", {
 
 newCommand("clear", {
 	desc = "Clears the terminal",
-	onFirst = function()
+	onFirst = function(msg, args)
 		LoveJam.ClearTerminalBuffer()
 		setCommandState("none")
 	end,
@@ -196,15 +201,24 @@ newCommand("clear", {
 })
 
 
-newCommand("forward", {
-	desc = "Moves the mech forward",
-	onFirst = function()
+newCommand("fw", {
+	desc = "Moves the mech forward, can specify amount [fw 8]",
+	onFirst = function(msg, args)
 		setCommandState("none")
 
 		if LoveJam.IsMechMoving() then
 			LoveJam.PushMessageToTerminal("Mech is still moving, aborting!")
 			return
 		end
+
+		local count = tonumber(args) or 1
+
+		if count > 1 then
+			LoveJam.MultiMoveForward(count)
+			LoveJam.PushMessageToTerminal("Moving forward " .. count .. " times!")
+			return
+		end
+
 
 
 		local moved = LoveJam.MoveMechForward()
@@ -219,6 +233,7 @@ newCommand("forward", {
 	onEnter = function(msg)
 	end,
 })
+
 
 newCommand("left", {
 	desc = "Rotates the mech left",

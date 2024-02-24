@@ -5,7 +5,7 @@ LvLKUI = LvLKUI or {}
 local stages = {
 	["tutoView"] = {
 		messages = {
-			"Welcome to [GAME NAME], in this game you control a mech.",
+			"Welcome to Mobile MechSuit, in this game you control a mech.",
 			"Please move your mouse to the left edge of the screen to look at the terminal."
 		},
 		trigger = "tutoView",
@@ -28,7 +28,7 @@ local stages = {
 	},
 	["tutoMove"] = {
 		messages = {
-			"Now, try to move the mech forward by typing in \"forward\"",
+			"Now, try to move the mech forward by typing in \"fw\"",
 		},
 		trigger = "tutoMove",
 		nextTuto = "tutoGlass1",

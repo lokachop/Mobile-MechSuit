@@ -5,7 +5,11 @@ LoveJam.CameraAng = Angle(0, 0, 0)
 
 
 function LoveJam.KillPlayer()
-	
+	LoveJam.SetState(STATE_DEATH)
+end
+
+function LoveJam.KillPlayerFall()
+	LoveJam.SetState(STATE_DEATH)
 end
 
 function LoveJam.BeginLevel(name)

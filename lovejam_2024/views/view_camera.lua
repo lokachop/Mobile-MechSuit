@@ -13,12 +13,14 @@ LoveJam.NewZone(view, {
 
 
 function view.onEnter()
+    LoveJam.IsOnCamera = true
     LoveJam.ViewTarget = Vector(.375, -.725, .3)
     LoveJam.AngTarget = Angle(0, -25, 0)
     LoveJam.TutoSendTrigger("tutoCam1")
 end
 
 function view.onExit()
+    LoveJam.IsOnCamera = false
 end
 
 local isPanMode = false

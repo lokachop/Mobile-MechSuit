@@ -36,6 +36,8 @@ LoveJam.LoadFile("levels.level1test")
 LoveJam.LoadFile("levels.level_tuto")
 LoveJam.LoadFile("levels.level1")
 LoveJam.LoadFile("levels.level2")
+LoveJam.LoadFile("levels.level3")
+LoveJam.LoadFile("levels.level4")
 
 
 --[[
@@ -66,5 +68,6 @@ LoveJam.LoadFile("state_handler")
 LoveJam.LoadFile("states.state_mainmenu")
 LoveJam.LoadFile("states.state_game")
 LoveJam.LoadFile("states.state_nextlevel")
+LoveJam.LoadFile("states.state_death")
 
 LoveJam.LoadFile("states.state_leveledit")

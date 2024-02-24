@@ -54,14 +54,17 @@ TILE_WALL = LoveJam.DeclareTile({
 TILE_KILL = LoveJam.DeclareTile({
     name = "kill",
     solid = false,
-    harmful = true,
+    harmful = false,
     editorTex = "dev_kill",
+    onStep = function(x, y)
+        LoveJam.KillPlayer()
+    end
 })
 
 TILE_SPAWN = LoveJam.DeclareTile({
     name = "spawn",
     solid = false,
-    harmful = true,
+    harmful = false,
     editorTex = "dev_spawn",
     onInit = function(x, y)
         LoveJam.SetMechPos(x, y)
@@ -72,7 +75,7 @@ TILE_SPAWN = LoveJam.DeclareTile({
 TILE_END = LoveJam.DeclareTile({
     name = "end",
     solid = false,
-    harmful = true,
+    harmful = false,
     editorTex = "dev_end",
     onStep = function(x, y)
         LoveJam.SetState(STATE_NEXTLEVEL)
@@ -84,4 +87,7 @@ TILE_KILL_FALL = LoveJam.DeclareTile({
     solid = false,
     harmful = true,
     editorTex = "dev_kill_fall",
+    onStep = function(x, y)
+        LoveJam.KillPlayerFall()
+    end
 })

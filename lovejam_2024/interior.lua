@@ -112,6 +112,69 @@ LvLK3D.PushUniverse(UniverseInterior)
 	LvLK3D.UpdateObjectMesh(screenCam)
 
 
+
+	local interiorTable = LvLK3D.AddObjectToUniv("interiorHullTable", "table")
+	LvLK3D.SetObjectPos(interiorTable, Vector(0, -.7, -.2))
+	LvLK3D.SetObjectScl(interiorTable, Vector(2, 1, 3))
+	LvLK3D.SetObjectMat(interiorTable, "metal3")
+	LvLK3D.SetObjectFlag(interiorTable, "SHADING", true)
+	LvLK3D.SetObjectFlag(interiorTable, "UV_SCALE", {16, 16})
+	LvLK3D.UpdateObjectMesh(interiorTable)
+	LvLK3D.SetObjectShadow(interiorTable, true)
+
+	local interiorKB1 = LvLK3D.AddObjectToUniv("interiorKB1", "keyboard")
+	LvLK3D.SetObjectPos(interiorKB1, Vector(-.5, -1.25, .25))
+	LvLK3D.SetObjectAng(interiorKB1, Angle(0, -25, 0))
+	LvLK3D.SetObjectScl(interiorKB1, Vector(.75, 1, .75))
+	LvLK3D.SetObjectMat(interiorKB1, "keyboard_sheet")
+	LvLK3D.SetObjectFlag(interiorKB1, "SHADING", true)
+	LvLK3D.UpdateObjectMesh(interiorKB1)
+	LvLK3D.SetObjectShadow(interiorKB1, true)
+
+
+	local interiorKB2 = LvLK3D.AddObjectToUniv("interiorKB2", "keyboard")
+	LvLK3D.SetObjectPos(interiorKB2, Vector(.5, -1.25, .25))
+	LvLK3D.SetObjectAng(interiorKB2, Angle(0, 25, 0))
+	LvLK3D.SetObjectScl(interiorKB2, Vector(.75, 1, .75))
+	LvLK3D.SetObjectMat(interiorKB2, "keyboard_sheet")
+	LvLK3D.SetObjectFlag(interiorKB2, "SHADING", true)
+	LvLK3D.UpdateObjectMesh(interiorKB2)
+	LvLK3D.SetObjectShadow(interiorKB2, true)
+
+
+
+	local posterVIP = LvLK3D.AddObjectToUniv("posterVIP", "plane")
+	LvLK3D.SetObjectPos(posterVIP, Vector(1.75, 0, 1.25))
+	LvLK3D.SetObjectAng(posterVIP, Angle(-90, 0, -90))
+	LvLK3D.SetObjectScl(posterVIP, Vector(.75, .5, .5))
+	LvLK3D.SetObjectMat(posterVIP, "poster_vip")
+	LvLK3D.SetObjectFlag(posterVIP, "SHADING", true)
+	LvLK3D.SetObjectFlag(posterVIP, "UV_SCALE", {1, -1})
+	LvLK3D.UpdateObjectMesh(posterVIP)
+
+
+	local interiorChair = LvLK3D.AddObjectToUniv("interiorHullChair", "chair")
+	LvLK3D.SetObjectPos(interiorChair, Vector(0, -.85, .6))
+	LvLK3D.SetObjectScl(interiorChair, Vector(1, 1, 1))
+	LvLK3D.SetObjectMat(interiorChair, "metal3")
+	LvLK3D.SetObjectFlag(interiorChair, "SHADING", true)
+	LvLK3D.SetObjectFlag(interiorChair, "UV_SCALE", {16, 16})
+	LvLK3D.UpdateObjectMesh(interiorChair)
+	LvLK3D.SetObjectShadow(interiorChair, true)
+
+
+	local interiorBlockade = LvLK3D.AddObjectToUniv("interiorHullBlockade", "interior_hull_blockade")
+	LvLK3D.SetObjectPos(interiorBlockade, Vector(0, 0, .2))
+	LvLK3D.SetObjectScl(interiorBlockade, Vector(2, 2, 2))
+	LvLK3D.SetObjectMat(interiorBlockade, "metal2")
+	LvLK3D.SetObjectFlag(interiorBlockade, "SHADING", true)
+	LvLK3D.SetObjectFlag(interiorBlockade, "SHADING_SMOOTH", false)
+	LvLK3D.SetObjectFlag(interiorBlockade, "NORM_INVERT", false)
+	LvLK3D.SetObjectFlag(interiorBlockade, "FULLBRIGHT", false)
+	LvLK3D.SetObjectFlag(interiorBlockade, "UV_SCALE", {16, 16})
+	LvLK3D.UpdateObjectMesh(interiorBlockade)
+
+
 	--[[
 	local boxRadio = LvLK3D.AddObjectToUniv("boxRadio", "cube")
 	LvLK3D.SetObjectPos(boxRadio, Vector(0.75, 0.75, -0.6))

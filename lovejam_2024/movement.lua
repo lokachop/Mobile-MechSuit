@@ -104,13 +104,29 @@ local function lerpVector(t, a, b)
 end
 
 
+local function onMoveDone()
+    local x = LoveJam.MechPos[1]
+    local y = LoveJam.MechPos[2]
+    local tile = LoveJam.GetTileAtPos(x, y)
+    local tParams = LoveJam.GetTileParams(tile)
+
+    if tParams.onStep then
+        tParams.onStep()
+    end
+end
+
+
+
+local lerpIsFall = false
+
 local lerpDeltaPos = 0
 local lerpStartPos = Vector(0, 0, 0)
 local lerpTargetPos = Vector(0, 0, 0)
 local function posLerpThink(dt)
     if lerpDeltaPos >= 1 then
-        if moveType == "pos" then
+        if moveType == "pos" and isMoving then
             isMoving = false
+            onMoveDone()
         end
 
         return
@@ -118,7 +134,13 @@ local function posLerpThink(dt)
 
     lerpDeltaPos = lerpDeltaPos + ((dt * .25) * MECH_MOVE_MUL)
     mechPosVis = lerpVector(lerpDeltaPos, lerpStartPos, lerpTargetPos)
-    mechPosVis[2] = math.abs(math.sin((lerpDeltaPos * 4) * math.pi) * .5)
+
+    if lerpIsFall then
+        mechPosVis[2] = mechPosVis[2] - (((lerpDeltaPos + 1) * (lerpDeltaPos + 1)) - 1)
+    else
+        mechPosVis[2] = mechPosVis[2] + math.abs(math.sin((lerpDeltaPos * 4) * math.pi) * .5)
+    end
+
 
     LoveJam.UpdateVisOnMechMove()
 end
@@ -138,6 +160,12 @@ local function angLerpThink(dt)
 
     lerpDeltaAng = lerpDeltaAng + ((dt * .225) * MECH_ROTATE_MUL)
     mechAngVis = Angle(0, lerp(lerpDeltaAng, lerpStartAng, lerpTargetAng), 0)
+
+    --if lerpIsFall then
+    --    mechAngVis[1] = (((lerpDeltaAng + 1) * (lerpDeltaAng + 1)) - 1) * 15
+    --end
+
+
     LoveJam.UpdateVisOnMechMove()
 
 end
@@ -159,6 +187,7 @@ function LoveJam.SetMechPos(x, y)
     lerpTargetPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
     mechPosVis = Vector(x * GRID_SZ, 0, y * GRID_SZ)
     lerpDeltaPos = 1
+    lerpIsFall = false
 
     LoveJam.MechPos = {x, y}
     LoveJam.UpdateVisOnMechMove()
@@ -171,6 +200,7 @@ function LoveJam.SetMechPosLerped(x, y)
     lerpDeltaPos = 0
     isMoving = true
     moveType = "pos"
+    lerpIsFall = false
 
 
     LoveJam.MechPos = {x, y}
@@ -182,6 +212,7 @@ function LoveJam.SetMechAng(ang)
     lerpTargetAng = ang
     mechAngVis = Angle(0, ang, 0)
     lerpDeltaAng = 1
+    lerpIsFall = false
 
     LoveJam.MechAng = ang
     LoveJam.UpdateVisOnMechMove()
@@ -196,6 +227,7 @@ function LoveJam.SetMechAngLerped(ang)
     elseif lerpStartAng == 0 and lerpTargetAng == 270 then
         lerpTargetAng = -90
     end
+    lerpIsFall = false
 
 
     lerpDeltaAng = 0
@@ -205,8 +237,6 @@ function LoveJam.SetMechAngLerped(ang)
     LoveJam.MechAng = ang
     LoveJam.UpdateVisOnMechMove()
 end
-
-
 
 function LoveJam.MoveMechForward()
     local forward = LoveJam.GetForwardTileDir()
@@ -229,12 +259,13 @@ function LoveJam.MoveMechForward()
         return false
     end
 
-    if tParams.onStep then
-        local stop = tParams.onStep()
-        if stop then
-            return false
-        end
+
+    if tParams.harmful then
+        LoveJam.SetMechPosLerped(newX, newY)
+        lerpIsFall = true
+        return true
     end
+
 
     LoveJam.SetMechPosLerped(newX, newY)
 
@@ -259,6 +290,32 @@ local rotLUT = {
         0,
     }
 }
+
+local movesLeft = 0
+function LoveJam.MultiMoveForward(count)
+    movesLeft = math.floor(math.min(math.max(count, 0), 16))
+end
+
+function LoveJam.MultiMoveThink()
+    if movesLeft <= 0 then
+        return
+    end
+
+
+    if LoveJam.IsMechMoving() then
+        return
+    end
+    movesLeft = movesLeft - 1
+
+    local ok = LoveJam.MoveMechForward()
+    if not ok then
+        movesLeft = 0
+        LoveJam.EditCurrentMessageOnTerminal("Obstacle detected, halting..")
+    else
+        LoveJam.EditCurrentMessageOnTerminal("Moving [OK]")
+    end
+    LoveJam.PushMessageToTerminal("")
+end
 
 
 function LoveJam.RotateMechLeft()

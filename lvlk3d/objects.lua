@@ -191,6 +191,11 @@ function LvLK3D.SetObjectBlend(index, blendMode)
 	obj.bMode = blendMode
 end
 
+
+function LvLK3D.SetObjectHidden(index, value)
+	LvLK3D.CurrUniv["objects"][index]["HIDDEN"] = value
+end
+
 function LvLK3D.SetObjectFlag(index, flag, value)
 	LvLK3D.CurrUniv["objects"][index][flag] = value
 end

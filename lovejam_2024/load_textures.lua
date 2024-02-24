@@ -26,6 +26,11 @@ LvLK3D.SetTextureFilter("metal4", "nearest", "nearest")
 LvLK3D.NewTexturePNG("monitor_sheet", "textures/monitor/monitor_sheet.png")
 LvLK3D.SetTextureFilter("monitor_sheet", "nearest", "nearest")
 
+LvLK3D.NewTexturePNG("keyboard_sheet", "textures/keyboard/keyboard_sheet.png")
+LvLK3D.SetTextureFilter("keyboard_sheet", "nearest", "nearest")
+
+
+
 
 LvLK3D.NewTexturePNG("flare1", "textures/light/flare1.png")
 LvLK3D.SetTextureFilter("flare1", "nearest", "nearest")
@@ -141,3 +146,6 @@ LvLK3D.SetTextureFilter("toxic", "nearest", "nearest")
 LvLK3D.NewTexturePNG("chain", "textures/lefton/misc/lokajam_rusty_chain.png")
 LvLK3D.SetTextureFilter("chain", "nearest", "nearest")
 
+
+LvLK3D.NewTexturePNG("poster_vip", "textures/lefton/misc/lokajam_plaque.png")
+LvLK3D.SetTextureFilter("poster_vip", "nearest", "nearest")

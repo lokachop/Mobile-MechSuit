@@ -15,6 +15,7 @@ end
 
 local UniverseWorld = LvLK3D.GetUniverseByTag("UniverseWorld")
 local UniverseWorldLights = LvLK3D.GetUniverseByTag("UniverseWorldLights")
+local UniverseInterior = LvLK3D.GetUniverseByTag("UniverseInterior")
 
 
 local function makeDeco(id, params)
@@ -100,6 +101,21 @@ function LoveJam.LoadLevel(name)
             addTile(k, k2, v2)
         end
     end
+
+
+    LvLK3D.PushUniverse(UniverseInterior)
+    local objBlockade = LvLK3D.GetObjectByName("interiorHullBlockade")
+    if levelData.isNoVis then
+        LvLK3D.SetObjectHidden(objBlockade, false)
+        LoveJam.EditCurrentMessageOnTerminal("Due to a radiation hazard, the windows have been closed.")
+        LoveJam.PushMessageToTerminal("")
+        LoveJam.EditCurrentMessageOnTerminal("Please make sure to follow protocol code LK-7375")
+        LoveJam.PushMessageToTerminal("")
+
+    else
+        LvLK3D.SetObjectHidden(objBlockade, true)
+    end
+    LvLK3D.PopUniverse()
 end
 
 function LoveJam.GetTileAtPos(x, y)
@@ -122,4 +138,8 @@ end
 
 function LoveJam.GetCurrentLevelData()
     return LoveJam.LevelList[LoveJam.ActiveLevel]
+end
+
+function LoveJam.GetCurrentLevelNoVis()
+    return LoveJam.LevelList[LoveJam.ActiveLevel].isNoVis
 end
