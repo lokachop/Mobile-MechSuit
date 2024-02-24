@@ -38,6 +38,7 @@ LoveJam.LoadFile("levels.level1")
 LoveJam.LoadFile("levels.level2")
 LoveJam.LoadFile("levels.level3")
 LoveJam.LoadFile("levels.level4")
+LoveJam.LoadFile("levels.level5")
 
 
 --[[

@@ -180,8 +180,10 @@ newCommand("help", {
 	onFirst = function(msg, args)
 		LoveJam.PushMessageToTerminal("--==Commands==--")
 		for k, v in pairs(commandTable) do
-			LoveJam.PushMessageToTerminal("[" .. k .. "]")
-			LoveJam.PushMessageToTerminal("    " .. v.desc)
+			if not v.hidden then
+				LoveJam.PushMessageToTerminal("[" .. k .. "]")
+				LoveJam.PushMessageToTerminal("    " .. v.desc)
+			end
 		end
 		setCommandState("none")
 		LoveJam.TutoSendTrigger("tutoCommands")
@@ -199,7 +201,6 @@ newCommand("clear", {
 	onEnter = function(msg)
 	end,
 })
-
 
 newCommand("fw", {
 	desc = "Moves the mech forward, can specify amount [fw 8]",
@@ -268,6 +269,21 @@ newCommand("right", {
 	onEnter = function(msg)
 	end,
 })
+
+
+newCommand("lore1", {
+	hidden = true,
+	desc = "Something",
+	onFirst = function(msg, args)
+		LoveJam.PushMessageToTerminal("Lore Bla Bla Bla")
+		LoveJam.PushMessageToTerminal("Lore Line 2 Bla Bla Bla!")
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
+
+
 
 
 local function playKB(sample)
