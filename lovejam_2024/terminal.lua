@@ -283,8 +283,61 @@ newCommand("lore1", {
 	end,
 })
 
+newCommand("instructions", {
+	hidden = false,
+	desc = "Instructions for operation of MCU",
+	onFirst = function(msg, args)
+		LoveJam.PushMessageToTerminal("Detailed guidance regarding the tasks assigned to associates under contract #AZ1567. It is ")
+		LoveJam.PushMessageToTerminal("imperative that we adhere to the outlined responsibilities to ensure the successful completion of ")
+		LoveJam.PushMessageToTerminal("our objectives.")
+		LoveJam.PushMessageToTerminal("			")
+		LoveJam.PushMessageToTerminal("1) Acquisition of Mech Suit")
+		LoveJam.PushMessageToTerminal("2) Navigation through Reactor Complex 5")
+		LoveJam.PushMessageToTerminal("3) Piloting the Mech into Reactor Core")
+		LoveJam.PushMessageToTerminal("4) Exiting the MCU")
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
 
+newCommand("controller", {
+	hidden = true,
+	desc = "Current Operator of MCU: ",
+	onFirst = function(msg, args)
+		LoveJam.PushMessageToTerminal("Name: [error]")
+		LoveJam.PushMessageToTerminal("Occupation: Mech suit pilot, CLASS 4")
+		LoveJam.PushMessageToTerminal("Service History: 24yrs")
+		LoveJam.PushMessageToTerminal("Occupational record: Minor Lacerations 11:56:11, Minor Radiation exposure ")
+		LoveJam.PushMessageToTerminal("98:56:92, Major Radiation Exposure - 99:70:70")
+		LoveJam.PushMessageToTerminal("Assignment success rate 72%")
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
 
+newCommand("lefton", {
+	hidden = true,
+	desc = "Lefton",
+	onFirst = function(msg, args)
+		LoveJam.PushMessageToTerminal("I made the last level and most of the textures")
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
+
+newCommand("loka", {
+	hidden = true,
+	desc = "Lefton",
+	onFirst = function(msg, args)
+		LoveJam.PushMessageToTerminal("I made the game :|")
+		setCommandState("none")
+	end,
+	onEnter = function(msg)
+	end,
+})
 
 local function playKB(sample)
 	local src = LvLK3D.PlaySound3D("sounds/keyboard/" .. sample, Vector(-0.75, -0.75, -0.4), 1, 1)
@@ -304,18 +357,6 @@ end
 local function playRandomSpaceSound()
 	playKB("space" .. math.random(1, 2) .. ".wav")
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
 function LoveJam.TerminalOnKey(key)
 	if key == "space" then
