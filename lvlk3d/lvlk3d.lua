@@ -32,7 +32,6 @@ LvLK3D.LoadFile("lights")
 LvLK3D.LoadFile("proctex")
 LvLK3D.LoadFile("procmodel")
 LvLK3D.LoadFile("postprocess")
-LvLK3D.LoadFile("trace")
 LvLK3D.LoadFile("sound")
 --LvLK3D.LoadFile("physics")
 

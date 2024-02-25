@@ -179,7 +179,7 @@ function state.onKeyPressed(key)
 	else
 		LoveJam.ViewKeyPressed(key)
 	end
-
+	--[[
 	if key == "kp8" then
 		LoveJam.SetState(STATE_NEXTLEVEL)
 	end
@@ -187,6 +187,7 @@ function state.onKeyPressed(key)
 	if key == "kp9" then
 		LoveJam.SetState(STATE_DEATH)
 	end
+	]]--
 end
 
 
@@ -207,10 +208,8 @@ function state.onEnter()
 	LoveJam.StartRadio()
 	LvLK3D.FOV = 90
 	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
-	print("Init")
 end
 
 function state.onExit()
 	LoveJam.StopRadio()
-	print("Exit")
 end

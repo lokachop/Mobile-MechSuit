@@ -71,5 +71,6 @@ LoveJam.LoadFile("states.state_mainmenu")
 LoveJam.LoadFile("states.state_game")
 LoveJam.LoadFile("states.state_nextlevel")
 LoveJam.LoadFile("states.state_death")
+LoveJam.LoadFile("states.state_credits")
 
 LoveJam.LoadFile("states.state_leveledit")

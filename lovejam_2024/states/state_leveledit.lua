@@ -118,6 +118,11 @@ end
 
 function state.onEnter()
 	print("LevelEdit")
+	-- load the trace library on LvLK3D
+	LvLK3D.LoadFile("trace")
+	LvLK3D.SendModelsToC()
+
+
 	--love.window.setMode(1200, 800, {
 	--	fullscreen = false,
 	--})

@@ -96,7 +96,7 @@ end
 
 
 local function lerp(t, a, b)
-    return a * (1 - math.min(t, 1)) + b * t
+    return a * (1 - math.min(t, 1)) + b * math.min(t, 1)
 end
 
 local function lerpVector(t, a, b)

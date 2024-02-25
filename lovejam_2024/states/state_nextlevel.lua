@@ -22,16 +22,24 @@ local function openUI()
 	frameNextMap:SetSize({256, 96 + 48})
 	frameNextMap:SetCloseDisabled(true)
 
+
+	local msg = "Next Level"
+	local levelData = LoveJam.GetCurrentLevelData()
+	local nextLevel = levelData.nextLevel
+	if not nextLevel or nextLevel == "none" then
+		msg = "Credits"
+	end
+
+
 	local buttonNext = LvLKUI.NewElement("button_next", "button")
 	buttonNext:SetPriority(40)
 	buttonNext:SetPos({128 - (128 * .5), 24 + 8 + 16})
 	buttonNext:SetSize({128, 32})
-	buttonNext:SetLabel(map == "credits" and "Credits" or "Next Level")
+	buttonNext:SetLabel(msg)
 	buttonNext:SetColourOverride({0.25, 0.5, 0.25}, {0.1, 0.25, 0.1}, {0.5, 1, 0.5})
 	buttonNext:SetOnClick(function(elm, mx, my)
 		frameNextMap:Remove()
-		LoveJam.SwitchToNextLevel(name)
-		LoveJam.SetState(STATE_GAME)
+		LoveJam.SwitchToNextLevel()
 	end)
 	LvLKUI.PushElement(buttonNext, frameNextMap)
 

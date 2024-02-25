@@ -32,7 +32,10 @@ function view.onMouseMoved(mx, my, dx, dy)
 
     LoveJam.CameraAng[1] = LoveJam.CameraAng[1] - (dy * 0.15)
     LoveJam.CameraAng[2] = LoveJam.CameraAng[2] - (dx * 0.15)
+
+    LoveJam.CameraAng[1] = math.min(math.max(LoveJam.CameraAng[1], -90), 90)
     --love.mouse.setPosition(w, h)
+
 
     return true
 end

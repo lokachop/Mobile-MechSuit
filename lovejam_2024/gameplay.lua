@@ -21,10 +21,11 @@ function LoveJam.SwitchToNextLevel()
 	local levelData = LoveJam.GetCurrentLevelData()
 	local nextLevel = levelData.nextLevel
 	if not nextLevel or nextLevel == "none" then
-		-- CREDITS TODO
+		LoveJam.SetState(STATE_CREDITS)
 		return
 	end
 
 
 	LoveJam.BeginLevel(nextLevel)
+	LoveJam.SetState(STATE_GAME)
 end

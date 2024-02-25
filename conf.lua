@@ -2,9 +2,9 @@ function love.conf(t)
     t.version = "11.5"
     t.window.title = "Mobile MechSuit"
     t.window.borderless = true
-    t.window.width = 1920
-    t.window.height = 1080
+    t.window.width = 800
+    t.window.height = 600
     t.window.vsync = -1
-    t.console = true
+    t.console = false
     t.modules.joystick = false
 end

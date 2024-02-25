@@ -107,24 +107,159 @@ end
 
 
 
+local function rmUI()
+	LvLKUI.RemoveElement("panel_mainmenu")
+	LvLKUI.RemoveElement("frame_level_select")
+	LvLKUI.RemoveElement("frame_map_edit")
+end
+
 
 local function onStart()
 	endMusic()
-	LvLKUI.RemoveElement("panel_mainmenu")
+	rmUI()
 	LoveJam.LoadLevel("level_tuto")
 	LoveJam.SetState(STATE_GAME)
 end
 
 local function onCredits()
 	endMusic()
-	LvLKUI.RemoveElement("panel_mainmenu")
+	rmUI()
 	LoveJam.SetState(STATE_CREDITS)
 end
 
+local levels = {
+	{
+		name = "level_tuto",
+		fancyName = "Tutorial Level",
+	}, {
+		name = "level1",
+		fancyName = "Level 1",
+	}, {
+		name = "level2",
+		fancyName = "Level 2",
+	}, {
+		name = "level3",
+		fancyName = "Level 3",
+	}, {
+		name = "level4",
+		fancyName = "Level 4",
+	}, {
+		name = "level5",
+		fancyName = "Level 5",
+	}, {
+		name = "levelfinal",
+		fancyName = "The Reactor Core",
+	},
+}
+
+
+local function onLevelSelect()
+	if LvLKUI.GetElement("frame_level_select") then
+		return
+	end
+
+	local w, h = love.graphics.getDimensions()
+	local frameLevelSelect = LvLKUI.NewElement("frame_level_select", "frame")
+	frameLevelSelect:SetLabel("Level Select")
+	frameLevelSelect:SetPriority(84)
+	frameLevelSelect:SetPos({(w * .5) - (256 * .5), (h * .5) - (96 * .5)})
+	frameLevelSelect:SetSize({256, 256 + 32})
+
+
+	local yBuff = 24 + 2
+	for k, v in ipairs(levels) do
+		local buttonLvl = LvLKUI.NewElement("button_level_" .. k, "button")
+		buttonLvl:SetPriority(40)
+		buttonLvl:SetPos({128 - 64 - 32, yBuff})
+		buttonLvl:SetSize({128 + 64, 32})
+		buttonLvl:SetLabel(v.fancyName)
+		buttonLvl:SetOnClick(function(elm, mx, my)
+			endMusic()
+			rmUI()
+			LoveJam.LoadLevel(v.name)
+			LoveJam.SetState(STATE_GAME)
+		end)
+		LvLKUI.PushElement(buttonLvl, frameLevelSelect)
+
+		yBuff = yBuff + 36
+	end
+
+
+	LvLKUI.PushElement(frameLevelSelect)
+end
+
+
+
 local function onMapEdit()
+	if LvLKUI.GetElement("frame_map_edit") then
+		return
+	end
+
+
+	local w, h = love.graphics.getDimensions()
+	local frameMapEdit = LvLKUI.NewElement("frame_map_edit", "frame")
+	frameMapEdit:SetLabel("Map Editor")
+	frameMapEdit:SetPriority(80)
+	frameMapEdit:SetPos({(w * .5) - (256 * .5), (h * .5) - (96 * .5)})
+	frameMapEdit:SetSize({256, 96 + 48})
+
+	local labels = {
+		"This will load the map editor.",
+		"All of the levels were made w/ this",
+		"its a very broken and bad editor",
+		"it might also crash your game.",
+		"Are you sure you want to open it?"
+	}
+
+
+	for k, v in ipairs(labels) do
+		local labelNfo = LvLKUI.NewElement("labelNfo" .. k, "label")
+		labelNfo:SetPriority(25)
+		labelNfo:SetPos({128, 24 + 8 + ((k - 1) * 16)})
+		labelNfo:SetSize({128, 32})
+		labelNfo:SetLabel(v)
+		labelNfo:SetAlignMode({1, 1})
+		LvLKUI.PushElement(labelNfo, frameMapEdit)
+	end
+
+
+
+
+	local buttonYes = LvLKUI.NewElement("button_yes", "button")
+	buttonYes:SetPriority(40)
+	buttonYes:SetPos({128 - 96, 24 + 8 + 74})
+	buttonYes:SetSize({64, 32})
+	buttonYes:SetLabel("Yes")
+	buttonYes:SetColourOverride({0.25, 0.5, 0.25}, {0.1, 0.25, 0.1}, {0.5, 1, 0.5})
+	buttonYes:SetOnClick(function(elm, mx, my)
+		frameMapEdit:Remove()
+		endMusic()
+		rmUI()
+		LoveJam.SetState(STATE_LEVELEDIT)
+	end)
+	LvLKUI.PushElement(buttonYes, frameMapEdit)
+
+	local buttonNo = LvLKUI.NewElement("button_no", "button")
+	buttonNo:SetPriority(40)
+	buttonNo:SetPos({128 + 32, 24 + 8 + 74})
+	buttonNo:SetSize({64, 32})
+	buttonNo:SetLabel("No")
+	buttonNo:SetColourOverride({0.5, 0.25, 0.25}, {0.25, 0.1, 0.1}, {1, 0.5, 0.5})
+	buttonNo:SetOnClick(function(elm, mx, my)
+		frameMapEdit:Remove()
+	end)
+	LvLKUI.PushElement(buttonNo, frameMapEdit)
+
+
+	LvLKUI.PushElement(frameMapEdit)
+
+
+end
+
+local function onQuit()
 	endMusic()
-	LvLKUI.RemoveElement("panel_mainmenu")
-	LoveJam.SetState(STATE_LEVELEDIT)
+	love.event.quit()
+	--buttonQuit
 end
 
 
@@ -190,8 +325,20 @@ local function initUI()
 	LvLKUI.PushElement(buttonCredits, panelButtons)
 
 
+	local buttonLevelSelect = LvLKUI.NewElement("button_level_select", "button")
+	buttonLevelSelect:SetPos({fw * .5 - (bw * .5), 240 + bh * 4})
+	buttonLevelSelect:SetSize({bw, bh})
+	buttonLevelSelect:SetLabel("Level Select")
+	buttonLevelSelect:SetPriority(40)
+	buttonLevelSelect:SetOnClick(function(elm)
+		onLevelSelect()
+	end)
+	LvLKUI.PushElement(buttonLevelSelect, panelButtons)
+
+
+
 	local buttonMapEdit = LvLKUI.NewElement("button_mapedit", "button")
-	buttonMapEdit:SetPos({fw * .5 - (bw * .5), 240 + bh * 4})
+	buttonMapEdit:SetPos({fw * .5 - (bw * .5), 240 + bh * 6})
 	buttonMapEdit:SetSize({bw, bh})
 	buttonMapEdit:SetLabel("Dev MapEditor")
 	buttonMapEdit:SetPriority(40)
@@ -199,6 +346,18 @@ local function initUI()
 		onMapEdit()
 	end)
 	LvLKUI.PushElement(buttonMapEdit, panelButtons)
+
+
+	local buttonQuit = LvLKUI.NewElement("button_quit", "button")
+	buttonQuit:SetPos({fw * .5 - (bw * .5), fh * .9})
+	buttonQuit:SetSize({bw, bh})
+	buttonQuit:SetLabel("Quit")
+	buttonQuit:SetPriority(40)
+	buttonQuit:SetColourOverride({0.5, 0.25, 0.25}, {0.25, 0.1, 0.1}, {1, 0.5, 0.5})
+	buttonQuit:SetOnClick(function(elm)
+		onQuit()
+	end)
+	LvLKUI.PushElement(buttonQuit, panelButtons)
 
 	LvLKUI.PushElement(panelButtons, LoveJam.PanelMainMenu)
 

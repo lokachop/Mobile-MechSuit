@@ -140,6 +140,20 @@ LvLK3D.NewTexturePNG("sign4", "textures/lefton/sign/lokajam_warnsign_2.png")
 LvLK3D.SetTextureFilter("sign4", "nearest", "nearest")
 
 
+
+LvLK3D.NewTexturePNG("fsign1", "textures/lefton/sign/lokajam_finalsign_1.png")
+LvLK3D.SetTextureFilter("fsign1", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("fsign2", "textures/lefton/sign/lokajam_finalsign_2.png")
+LvLK3D.SetTextureFilter("fsign2", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("fsign3", "textures/lefton/sign/lokajam_finalsign_3.png")
+LvLK3D.SetTextureFilter("fsign3", "nearest", "nearest")
+
+LvLK3D.NewTexturePNG("fsign4", "textures/lefton/sign/lokajam_finalsign_4.png")
+LvLK3D.SetTextureFilter("fsign4", "nearest", "nearest")
+
+
 LvLK3D.NewTexturePNG("toxic", "textures/lefton/misc/toxic_waste.png")
 LvLK3D.SetTextureFilter("toxic", "nearest", "nearest")
 
