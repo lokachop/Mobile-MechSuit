@@ -27,8 +27,6 @@ LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 1000)
 DO_NOCLIP = false
 
 function state.onThink(dt)
-	LvLK3D.MouseCamThink(dt)
-
 	LvLK3D.PushUniverse(UniverseWorld)
 		LvLK3D.SoundThink(dt)
 	LvLK3D.PopUniverse()
@@ -41,6 +39,8 @@ function state.onThink(dt)
 		LoveJam.MechMovementInterpThink(dt)
 		LoveJam.SoundInteriorThink(dt)
 		LoveJam.MultiMoveThink()
+	else
+		LvLK3D.MouseCamThink(dt)
 	end
 	LoveJam.TerminalFlashThink()
 end
@@ -62,9 +62,10 @@ local function updateCam()
 		LvLK3D.PushUniverse(UniverseWorldLights)
 			LvLK3D.RenderActiveUniverse()
 		LvLK3D.PopUniverse()
-		LvLK3D.SetCamPos(prevCam)
-		LvLK3D.SetCamAng(prevAng)
 	LvLK3D.PopRenderTarget()
+
+	LvLK3D.SetCamPos(prevCam)
+	LvLK3D.SetCamAng(prevAng)
 end
 
 
@@ -79,6 +80,10 @@ local nextOutsideUpdate = 0
 
 
 local function updateOutside()
+	local prevCam = LvLK3D.CamPos
+	local prevAng = LvLK3D.CamAng
+
+
 	local mechCamAng = LoveJam.GetMechCamAng()
 	local newRealAng = LvLK3D.CamAng - LoveJam.GetMechCamAng()
 
@@ -97,6 +102,10 @@ local function updateOutside()
 			LvLK3D.RenderActiveUniverse()
 		LvLK3D.PopUniverse()
 	LvLK3D.PopRenderTarget()
+
+
+	LvLK3D.SetCamPos(prevCam)
+	LvLK3D.SetCamAng(prevAng)
 end
 
 
@@ -161,7 +170,7 @@ function state.onRender()
 
 	LoveJam.ViewRender()
 	LoveJam.RenderTutorial()
-	LoveJam.RenderZones()
+	--LoveJam.RenderZones()
 end
 
 function state.onKeyPressed(key)

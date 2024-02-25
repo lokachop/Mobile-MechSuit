@@ -182,12 +182,18 @@ function LoveJam.GetMechLerpTimers()
 end
 
 
+local movesLeft = 0
+function LoveJam.MultiMoveForward(count)
+    movesLeft = math.floor(math.min(math.max(count, 0), 16))
+end
+
 function LoveJam.SetMechPos(x, y)
     lerpStartPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
     lerpTargetPos = Vector(x * GRID_SZ, 0, y * GRID_SZ)
     mechPosVis = Vector(x * GRID_SZ, 0, y * GRID_SZ)
     lerpDeltaPos = 1
     lerpIsFall = false
+    movesLeft = 0
 
     LoveJam.MechPos = {x, y}
     LoveJam.UpdateVisOnMechMove()
@@ -291,10 +297,6 @@ local rotLUT = {
     }
 }
 
-local movesLeft = 0
-function LoveJam.MultiMoveForward(count)
-    movesLeft = math.floor(math.min(math.max(count, 0), 16))
-end
 
 function LoveJam.MultiMoveThink()
     if movesLeft <= 0 then

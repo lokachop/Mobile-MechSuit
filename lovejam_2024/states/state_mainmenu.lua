@@ -111,8 +111,8 @@ end
 local function onStart()
 	endMusic()
 	LvLKUI.RemoveElement("panel_mainmenu")
-	LoveJam.SetState(STATE_GAME)
 	LoveJam.LoadLevel("level_tuto")
+	LoveJam.SetState(STATE_GAME)
 end
 
 local function onCredits()
@@ -132,7 +132,7 @@ end
 
 local texLogo = love.graphics.newImage("textures/logo.png")
 texLogo:setFilter("nearest", "nearest")
-local logoW, logoH = 56, 24
+local logoW, logoH = 56, 21
 local logoScl = 6
 
 local target = "robot"

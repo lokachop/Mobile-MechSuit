@@ -121,7 +121,8 @@ local function newCommand(name, params)
 		desc = params.desc or "No description",
 		onFirst = params.onFirst or function() end,
 		onEnter = params.onEnter or function(msg, realMsg) end,
-		name = name
+		name = name,
+		hidden = params.hidden or false,
 	}
 
 end

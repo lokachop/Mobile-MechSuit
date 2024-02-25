@@ -143,3 +143,7 @@ end
 function LoveJam.GetCurrentLevelNoVis()
     return LoveJam.LevelList[LoveJam.ActiveLevel].isNoVis
 end
+
+function LoveJam.GetCurrentLevelRadioTrack()
+    return LoveJam.LevelList[LoveJam.ActiveLevel].trackOverride or "sounds/music/radio1_shit.wav"
+end
