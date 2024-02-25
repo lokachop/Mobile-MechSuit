@@ -132,12 +132,11 @@ function state.onRender()
 
 	LvLK3D.BuildProjectionMatrix(sw / sh, 0.01, 10000)
 		if not LoveJam.IsOnCamera and not LoveJam.GetCurrentLevelNoVis() then
-			if LoveJam.IsOnGlass then
+			--if LoveJam.IsOnGlass then
 				updateOutside()
-			elseif CurTime > nextOutsideUpdate then
-				nextOutsideUpdate = CurTime + outsideInterval
-				updateOutside()
-			end
+			--elseif CurTime > nextOutsideUpdate then
+				--nextOutsideUpdate = CurTime + outsideInterval
+			--end
 		end
 
 	LvLK3D.PushRenderTarget(RTGame)
