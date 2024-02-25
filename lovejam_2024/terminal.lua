@@ -146,6 +146,10 @@ local function handleCommandEnter()
 
 	local cmd = commandTable[cmdTarget]
 	if not cmd then
+		if not cmdTarget then
+			return
+		end
+
 		LoveJam.PushMessageToTerminal("Unknown Command \"" .. cmdTarget .. "\"!")
 		return
 	end
